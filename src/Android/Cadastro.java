@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Label;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -31,7 +30,7 @@ public class Cadastro extends Telas implements MouseListener {
             desenharBackground(g2d);
 
             g2d.setColor(Color.WHITE);
-            
+
             g2d.drawImage(Control.buscarImagem("res\\iconuser.png"), 35, 145, 20, 20, null);
             g2d.fillRect(35, 170, 230, 2);
 
@@ -46,15 +45,6 @@ public class Cadastro extends Telas implements MouseListener {
 
             g2d.drawImage(Control.buscarImagem("res\\iconpass.png"), 35, 345, 20, 20, null);
             g2d.fillRect(35, 370, 230, 2);
-//            g2d.fillRect(35, 170, 230, 2);
-//
-//            g2d.fillRect(35, 220, 230, 2);
-//
-//            g2d.fillRect(35, 270, 230, 2);
-//
-//            g2d.fillRect(35, 320, 230, 2);
-//
-//            g2d.fillRect(35, 370, 230, 2);
 
             desenharFundo(g2d);
         }
@@ -92,19 +82,10 @@ public class Cadastro extends Telas implements MouseListener {
         criarCampo(senha1, "Senha", Color.white, Color.darkGray, new Rectangle(60, 300, 205, 30), new Font("", 0, 16), this, this);
 
         criarCampo(senha2, "Confirme sua senha", Color.white, Color.DARK_GRAY, new Rectangle(60, 350, 195, 30), new Font("", 0, 16), this, this);
-//        criarCampo(nome, "Nome", Color.white, Color.darkGray, new Rectangle(35, 150, 230, 30), fonteCampos, this, this);
-//
-//        criarCampo(user, "Usuário", Color.white, Color.darkGray, new Rectangle(35, 200, 230, 30), fonteCampos, this, this);
-//
-//        criarCampo(email, "E-Mail", Color.white, Color.darkGray, new Rectangle(35, 250, 230, 30), fonteCampos, this, this);
-//
-//        criarCampo(senha1, "Senha", Color.white, Color.darkGray, new Rectangle(35, 300, 230, 30), new Font("", 0, 16), this, this);
-//
-//        criarCampo(senha2, "Confirme sua senha", Color.white, Color.DARK_GRAY, new Rectangle(35, 350, 230, 30), new Font("", 0, 16), this, this);
 
         botaoRegistrar.setBounds(35, 425, 230, 45);
         botaoRegistrar.setIcon(new ImageIcon("res\\registrar.png"));
-        
+
         this.add(botaoRegistrar);
 
         botaoVoltar(this, this);

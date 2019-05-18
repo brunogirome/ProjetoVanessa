@@ -19,7 +19,7 @@ public class Android extends JPanel {
     public static final int LARGURA = 300, ALTURA = 600;
 
     public static Login login;
-    public static Home dashboard;
+    public static Mapa dashboard;
 
     public static JFrame Frame;
 

@@ -3,7 +3,6 @@ package ProjetoVanessa;
 import Android.Android;
 import static ProjetoVanessa.Control.hora;
 import static ProjetoVanessa.Control.minutos;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -18,9 +17,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Control {
-    
-    //https://leafletjs.com/examples/quick-start/
 
+    //https://leafletjs.com/examples/quick-start/
     public static int hora = 1;
     public static int minutos = 0;
 
@@ -28,16 +26,14 @@ public class Control {
 
     public static Android Android;
 
-    public static List<Rectangle> Chuva = new ArrayList<>();
-
-    public static List<Rectangle> Alagamentos = new ArrayList<>();
+    public static List<Areas> Areas = new ArrayList<>();
 
     public static List<Eventos> Eventos = new ArrayList<>();
 
     public Control() {
         new Controladora();
 
-        Android = new Android(115, 350);
+        Android = new Android(300, 540);
         Android.revalidate();
 
         timer.start();

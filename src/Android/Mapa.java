@@ -1,24 +1,23 @@
 package Android;
 
+import ProjetoVanessa.Areas;
 import ProjetoVanessa.Control;
 import ProjetoVanessa.Eventos;
 import ProjetoVanessa.TipoEventos;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Home extends Telas implements MouseListener, MouseMotionListener {
+public class Mapa extends Telas implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = -5395688902855962555L;
 
+    //“Câmera X”, “Câmera Y”, pontos iniciar de renderização da sub-imagem do mapa
     private int cX, cY;
 
     private Point clickInicial;
@@ -29,69 +28,27 @@ public class Home extends Telas implements MouseListener, MouseMotionListener {
         @Override
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
-            desenharMapa(g2d);
 
-            //desenharChuva(g2d);
-            desenharLocalidade(g2d);
-
-            desenharArea(g2d, Control.Chuva, TipoEventos.chuva);
+            renderizarMapa(g2d);
 
             desenharFundo(g2d);
-
         }
     };
 
-    public Home(JFrame frame) {
+    public Mapa(JFrame frame) {
         super(frame);
-
-        cX = Android.InicialX - 150;
-        cX = Android.InicialY - 150;
+        centralizarPonto(Android.InicialX, Android.InicialY);
 
         painelDashboard.addMouseListener(this);
         painelDashboard.addMouseMotionListener(this);
-
         painelDashboard.setBounds(tamanhoTela);
+
         this.add(painelDashboard);
-
     }
 
-    //Método responsável pelo desenho das áreas no mapa, como chuva, alagamentos, e etc...
-    private void desenharArea(Graphics2D g2d, List<Rectangle> lista, TipoEventos evento) {
-        Color c1 = null;
-        Color c2 = null;
-        switch (evento) {
-            case chuva:
-                lista = Control.Chuva;
-                c1 = new Color(45, 45, 90, 52);
-                c2 = new Color(45, 45, 180, 128);
-                break;
-            case alagamento:
-                lista = Control.Alagamentos;
-                break;
-            default:
-                throw new IllegalArgumentException("Tipo de evento inválido");
-        }
-        for (Rectangle area : lista) {
-            if ((cX < area.width + area.x && cY < area.height + area.y)) {
-                g2d.setColor(c1);
-                g2d.fillRect(area.x - cX, (20 + area.y) - cY, area.width, area.height);
-                g2d.setColor(c2);
-                g2d.drawRect(area.x - cX, (20 + area.y) - cY, area.width, area.height);
-                Android.desenharObjeto((area.width / 2) + area.x,
-                        (area.height / 2) + area.y,
-                        cX,
-                        cY,
-                        32,
-                        g2d,
-                        "res\\chuva .png");
-                System.out.println("res\\" + evento.toString() + ".png");
-            }
-        }
-    }
-
-    //Méotodo responsável pelo desenho do local em que o celular da aplica se encontra
+    //Méotodo responsável pelo desenho do local em que o celular da aplicação se encontra
     private void desenharLocalidade(Graphics2D g2d) {
-        Android.desenharObjeto(Android.InicialX, Android.InicialY, cX, cY, 24, g2d, "res\\lf.png");
+        Android.desenharObjeto(Android.InicialX, Android.InicialY, cX, cY, 48, g2d, "res\\lf.png");
     }
 
     //Método responsável pelo desenho dos eventos do mapa
@@ -101,7 +58,41 @@ public class Home extends Telas implements MouseListener, MouseMotionListener {
         }
     }
 
-    private void desenharMapa(Graphics2D g2d) {
+    //Método responsável pelo desenho das áreas
+    private void desenharAreas(Graphics2D g2d) {
+        for (Areas area : Control.Areas) {
+            area.desenharArea(g2d, Control.Areas, TipoEventos.chuva, cX, cY);
+        }
+    }
+
+    //Método que une todas as classes que desenham objetos no mapa, em suas respectivas ordens de camada. 
+    //(Os métodos desenhados por último fica por cima dos primeiros).
+    private void renderizarMapa(Graphics2D g2d) {
+        //Primeira layer, câmera sobre as coordenadas do mapa.
+        camera(g2d);
+        //Segunda layer, áreas como chuvas, alagamentos, e etc.
+        desenharAreas(g2d);
+        //Terceira layer, eventos, como queda de árvore, acidentes e etc.
+        desenharEventos(g2d);
+        //Quarta layer, posicionamento atual do GPS.
+        desenharLocalidade(g2d);
+    }
+
+    //Método responsável pela visualização de uma determinada parte do mapa, que é controlada pelo mouse
+    private void camera(Graphics2D g2d) {
+        limitarCamera();
+        g2d.drawImage(Control.buscarImagem("res\\cidade.png").getSubimage(cX, cY, 300, 540), 0, 21, 300, 540, null);
+    }
+
+    //Metódo utilizado para centralizar a câmera em um certo ponto
+    private void centralizarPonto(int x, int y) {
+        cX = x - 150;
+        cY = y - 270;
+        Control.Android.repaint();
+    }
+
+    //Método utilizado para evitar erros ao carregar a sub-imagem do mapa
+    private void limitarCamera() {
         if (cX > 900) {
             cX = 900;
         }
@@ -114,7 +105,6 @@ public class Home extends Telas implements MouseListener, MouseMotionListener {
         if (cY < 0) {
             cY = 0;
         }
-        g2d.drawImage(Control.buscarImagem("res\\cidade.png").getSubimage(cX, cY, 300, 540), 0, 21, 300, 540, null);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package ProjetoVanessa;
 
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -12,10 +11,10 @@ public class Controladora extends JPanel implements ActionListener {
 
     JFrame frame;
 
-    JTextField xic = new JTextField("x Chuva");
-    JTextField xfc = new JTextField("larg Chuva");
-    JTextField yic = new JTextField("y Chuva");
-    JTextField yfc = new JTextField("alt Chuva");
+    JTextField xic = new JTextField("xChuva");
+    JTextField xfc = new JTextField("largChuva");
+    JTextField yic = new JTextField("yChuva");
+    JTextField yfc = new JTextField("altChuva");
 
     JTextField xia = new JTextField("x Alagamento");
     JTextField xfa = new JTextField("larg Alagamento");
@@ -36,22 +35,22 @@ public class Controladora extends JPanel implements ActionListener {
         this.add(yfc);
 
         this.add(btn);
-
     }
 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btn) {
 
-            Control.Chuva.add(
-                    new Rectangle(
+        if (e.getSource() == btn) {
+            Control.Areas.add(
+                    new Areas(
                             Integer.parseInt(xic.getText()),
                             Integer.parseInt(yic.getText()),
                             Integer.parseInt(xfc.getText()),
-                            Integer.parseInt(yfc.getText())
+                            Integer.parseInt(yfc.getText()),
+                            TipoEventos.chuva
                     )
             );
-
             Control.Android.repaint();
         }
     }

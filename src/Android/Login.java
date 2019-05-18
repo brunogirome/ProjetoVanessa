@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.TextField;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
@@ -17,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.text.JTextComponent;
 
 public class Login extends Telas implements MouseListener {
 
@@ -82,19 +80,9 @@ public class Login extends Telas implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-//        if (e.getSource() == campoLogin) {
-//            campoLogin.setText("");
-//            campoLogin.setForeground(Color.white);
-//        }
-//
-//        if (e.getSource() == campoPw) {
-//            campoPw.setText("");
-//            campoPw.setForeground(Color.white);
-//        }
 
         if (e.getSource() == entrar) {
-            new Home(Android.Frame);
-            //criarCadastro.setVisible(false);
+            new Mapa(Android.Frame);
         }
 
         if (e.getSource() == criarCadastro) {
