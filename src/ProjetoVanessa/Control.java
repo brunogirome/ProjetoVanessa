@@ -18,7 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class Control implements Constantes {
 
-    //https://leafletjs.com/examples/quick-start/
+    // https://leafletjs.com/examples/quick-start/
     public static int hora = 1;
     public static int minutos = 0;
 
@@ -31,8 +31,8 @@ public class Control implements Constantes {
     public static List<Eventos> Eventos = new ArrayList<>();
 
     public Control() {
-        //new Controladora();
-        
+        // new Controladora();
+
         new ControleClima();
 
         Android = new Android(300, 540);
@@ -74,10 +74,12 @@ public class Control implements Constantes {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
+                | UnsupportedLookAndFeelException e) {
             System.out.println("Erro no Look and Feel:\n" + e);
         }
         new Control();
+
     }
 
 }
