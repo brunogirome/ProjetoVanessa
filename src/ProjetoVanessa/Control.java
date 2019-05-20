@@ -26,9 +26,9 @@ public class Control implements Constantes {
 
     public static Android Android;
 
-    public static List<Areas> Areas = new ArrayList<>();
+    public static List<Areas> ListaAreas = new ArrayList<>();
 
-    public static List<Eventos> Eventos = new ArrayList<>();
+    public static List<Eventos> ListaEventos = new ArrayList<>();
 
     public Control() {
         // new Controladora();

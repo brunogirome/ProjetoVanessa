@@ -21,6 +21,8 @@ public class Cadastro extends Telas implements MouseListener {
 
     private static final long serialVersionUID = -7980272468065386510L;
 
+    int teste = 3;
+    
     private JPanel panelCadastro = new JPanel(null) {
         private static final long serialVersionUID = 1L;
 

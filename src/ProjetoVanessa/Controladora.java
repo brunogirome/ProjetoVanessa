@@ -42,7 +42,7 @@ public class Controladora extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btn) {
-            Control.Areas.add(
+            Control.ListaAreas.add(
                     new Areas(
                             Integer.parseInt(xic.getText()),
                             Integer.parseInt(yic.getText()),
