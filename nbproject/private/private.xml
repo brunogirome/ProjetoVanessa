@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/28264088/Downloads/projeto%20vanessa%20dia%2015/ProjetoVanessa/vanessadia16/src/ProjetoVanessa/Controladora.java</file>
-            <file>file:/C:/Users/28264088/Downloads/projeto%20vanessa%20dia%2015/ProjetoVanessa/vanessadia16/src/ProjetoVanessa/Control.java</file>
-            <file>file:/C:/Users/28264088/Downloads/projeto%20vanessa%20dia%2015/ProjetoVanessa/vanessadia16/src/Android/Android.java</file>
-            <file>file:/C:/Users/28264088/Downloads/projeto%20vanessa%20dia%2015/ProjetoVanessa/vanessadia16/src/Android/Home.java</file>
-            <file>file:/C:/Users/28264088/Downloads/projeto%20vanessa%20dia%2015/ProjetoVanessa/vanessadia16/src/Android/Telas.java</file>
-            <file>file:/C:/Users/28264088/Downloads/projeto%20vanessa%20dia%2015/ProjetoVanessa/vanessadia16/src/ProjetoVanessa/TipoEventos.java</file>
-            <file>file:/C:/Users/28264088/Downloads/projeto%20vanessa%20dia%2015/ProjetoVanessa/vanessadia16/src/ProjetoVanessa/Eventos.java</file>
-        </group>
         <group name="Faculdade">
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/ControleClima/ControleClimaMouse.java</file>
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/ProjetoVanessa/Janela.java</file>
@@ -20,6 +11,24 @@
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/ControleClima/PainelLateral.java</file>
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/ControleClima/ControleClima.java</file>
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/Android/Android.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/TipoEventos.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ControleClima/ControleClimaMouse.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/Conexoes.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ControleClima/ControleClima.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/Areas.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/Control.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/Constantes.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/Android/Cadastro.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/Controladora.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/RuaVO.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/Janela.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ControleClima/PainelLateral.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/Android/Android.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ProjetoVanessa/Eventos.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/Android/Mapa.java</file>
+            <file>file:/C:/Users/28264088/Documents/ProjetoVanessa/src/ControleClima/PainelClima.java</file>
         </group>
     </open-files>
 </project-private>

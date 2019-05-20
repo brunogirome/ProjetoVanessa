@@ -1,6 +1,7 @@
 package ProjetoVanessa;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public class Eventos {
 
@@ -9,10 +10,15 @@ public class Eventos {
 
     private final int TAM_IMAGEM = 24;
 
-    public Eventos(int x, int y, TipoEventos evento) {
-        this.x = x;
-        this.y = y;
+    private RuaVO rua;
+
+    public Eventos(RuaVO rua, TipoEventos evento) {
+
         this.evento = evento;
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, 1, 1);
     }
 
     public void desenharEvento(Graphics2D g2d, int cX, int cY) {

@@ -3,6 +3,7 @@ package ProjetoVanessa;
 import Android.Android;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.List;
 
 public class Areas {
@@ -27,22 +28,23 @@ public class Areas {
         checarCor();
     }
 
-    public void desenharArea(Graphics2D g2d, List<Areas> lista, TipoEventos evento, int cX, int cY) {
-        for (Areas area : lista) {
-            if ((cX < area.comp + area.x && cY < area.altu + area.y)) {
-                g2d.setColor(c1);
-                g2d.fillRect(area.x - cX, (20 + area.y) - cY, area.comp, area.altu);
-                g2d.setColor(c2);
-                g2d.drawRect(area.x - cX, (20 + area.y) - cY, area.comp, area.altu);
-                Android.desenharObjeto((area.comp / 2) + area.x,
-                        (area.altu / 2) + area.y,
-                        cX,
-                        cY,
-                        TAM_ICONE,
-                        g2d,
-                        "res\\" + evento + ".png");
-            }
+    public void desenharArea(Graphics2D g2d, int cX, int cY) {
+
+        //RuaX < areax + areaw
+        if ((cX < comp + x && cY < altu + y)) {
+            g2d.setColor(c1);
+            g2d.fillRect(x - cX, (20 + y) - cY, comp, altu);
+            g2d.setColor(c2);
+            g2d.drawRect(x - cX, (20 + y) - cY, comp, altu);
+            Android.desenharObjeto((comp / 2) + x,
+                    (altu / 2) + y,
+                    cX,
+                    cY,
+                    TAM_ICONE,
+                    g2d,
+                    "res\\" + evento + ".png");
         }
+
     }
 
     private void checarCor() {
@@ -56,6 +58,10 @@ public class Areas {
             default:
                 throw new IllegalArgumentException("Tipo de evento inválido");
         }
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(this.x, this.y, this.comp, this.altu);
     }
 
     /**

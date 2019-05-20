@@ -32,11 +32,16 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
             renderizarMapa(g2d);
 
             desenharFundo(g2d);
+            
+             
         }
     };
 
     public Mapa(JFrame frame) {
         super(frame);
+        
+         
+        
         centralizarPonto(Android.InicialX, Android.InicialY);
 
         painelDashboard.addMouseListener(this);
@@ -53,15 +58,15 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
 
     //Método responsável pelo desenho dos eventos do mapa
     private void desenharEventos(Graphics2D g2d) {
-        for (Eventos evento : Control.Eventos) {
+        for (Eventos evento : Control.ListaEventos) {
             evento.desenharEvento(g2d, cX, cY);
         }
     }
 
     //Método responsável pelo desenho das áreas
     private void desenharAreas(Graphics2D g2d) {
-        for (Areas area : Control.Areas) {
-            area.desenharArea(g2d, Control.Areas, TipoEventos.chuva, cX, cY);
+        for (Areas area : Control.ListaAreas) {
+            area.desenharArea(g2d, Control.ListaAreas, TipoEventos.chuva, cX, cY);
         }
     }
 
