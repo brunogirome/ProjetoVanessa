@@ -22,13 +22,12 @@ public class Android extends JPanel {
     public static Mapa dashboard;
 
     public static JFrame Frame;
-
     public static int InicialX, InicialY;
 
     public Android(int x, int y) {
 
-        InicialX = x;
-        InicialY = y;
+        Android.InicialX = x;
+        Android.InicialY = y;
 
         Frame = new JFrame();
         Frame.setIconImage(new ImageIcon("res\\ficon.png").getImage());

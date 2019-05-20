@@ -1,5 +1,6 @@
 package ProjetoVanessa;
 
+import ControleClima.ControleClima;
 import Android.Android;
 import static ProjetoVanessa.Control.hora;
 import static ProjetoVanessa.Control.minutos;
@@ -8,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -16,7 +16,7 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class Control {
+public class Control implements Constantes {
 
     //https://leafletjs.com/examples/quick-start/
     public static int hora = 1;
@@ -31,16 +31,15 @@ public class Control {
     public static List<Eventos> Eventos = new ArrayList<>();
 
     public Control() {
-        new Controladora();
+        //new Controladora();
+        
+        new ControleClima();
 
         Android = new Android(300, 540);
         Android.revalidate();
 
         timer.start();
     }
-
-    public static DecimalFormat fmtMin = new DecimalFormat("00");
-    public static DecimalFormat fmtHora = new DecimalFormat(" 0");
 
     private void atualizarHora() {
         minutos++;
@@ -52,7 +51,7 @@ public class Control {
             }
         }
 
-        Horario = Control.fmtHora.format(hora) + ":" + Control.fmtMin.format(minutos);
+        Horario = Control.FORMATO_HORA.format(hora) + ":" + Control.FORMATO_MIN.format(minutos);
         Android.repaint();
     }
 
