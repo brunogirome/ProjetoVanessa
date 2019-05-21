@@ -15,21 +15,25 @@ public class Rua extends Conexoes {
     private int larg;
     private int altu;
 
+    private boolean vertical;
+
     public Rua(int id, String desc, int x, int y, int larg, int altu) {
         this.id = id;
         this.desc = desc;
-        this.x = x;//4
-        this.y = y;//4
-        this.larg = larg;//4
-        this.altu = altu;//1000
+        this.x = x;
+        this.y = y;
+        this.larg = larg;
+        this.altu = altu;
         corrigirDados();
     }
 
     private void corrigirDados() {
         if (y == altu) {
-            altu = 6;
+            altu = 5;
+            this.larg = this.larg - x;
         } else if (x == larg) {
-            larg = 6;
+            larg = 5;
+            this.altu = this.altu - y;
         }
     }
 
@@ -40,9 +44,15 @@ public class Rua extends Conexoes {
          * (Areas area : Control.ListaAreas) { if
          * (getBounds().intersects(area.getBounds())) { desenhar = true; } }
          */
+////        int x = this.x;
+////        int y = this.y;
+////        int w = this.larg;
+////        int h = this.larg;
         if ((cX < larg + x && cY < altu + y)) {
-            g2d.setColor(new Color(0, 255, 0, 50));
+            //g2d.setColor(new Color(0, 255, 0, 50));
+            g2d.setColor(new Color(0, 255, 0, 128));
             g2d.fillRect(x - cX, (20 + y) - cY, larg, altu);
+            //System.out.println("RUA: " + desc + "\nDESENHANDO NA POSIÇÃO: [X: " + (x - cX) + "][Y: " + (20 + y - cY) + "][LARG: " + larg + "][ALTU: " + altu + "]");
         }
     }
 

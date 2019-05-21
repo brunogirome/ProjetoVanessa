@@ -21,15 +21,15 @@ public class Eventos {
     }
 
     private void defXY() {
-        if (rua.getX() == (rua.getX() + rua.getLarg()) - 6) {
-            this.x = rua.getX() + 3;
-            this.y = (int) (rua.getAltu() * desloc);
-        } else if (rua.getY() == (rua.getY() + rua.getAltu()) - 6) {
-            this.x = (int) (rua.getLarg() * desloc);
-            this.y = rua.getY() + 3;
+        if (rua.getX() == (rua.getX() + rua.getLarg()) - 5) {
+            this.x = rua.getX() + 2;
+            this.y = rua.getY() + (int) (rua.getAltu() * desloc);
+        } else if (rua.getY() == (rua.getY() + rua.getAltu()) - 5) {
+            this.x = rua.getX() + (int) (rua.getLarg() * desloc);
+            this.y = rua.getY() + 2;
         } else {
-
         }
+
     }
 
     public Rectangle getBounds() {

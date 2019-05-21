@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Maio-2019 às 17:29
+-- Generation Time: 21-Maio-2019 às 21:30
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.2
 
@@ -118,7 +118,7 @@ INSERT INTO `ruas` (`RUA_ID_PK`, `RUA_DESC`, `RUA_X`, `RUA_Y`, `RUA_W`, `RUA_H`)
 (21, 'Rua Eniac', 505, 972, 505, 1164),
 (22, 'Rua Alter', 697, 100, 697, 588),
 (23, 'Rua Itália', 796, 4, 796, 196),
-(24, 'Rua França', 796, 297, 296, 490),
+(24, 'Rua França', 796, 297, 796, 490),
 (25, 'Rua Irlanda', 894, 4, 894, 1163),
 (26, 'Rua Armênia', 1089, 4, 1089, 587),
 (27, 'Av. Leonardo da Vinci', 1189, 4, 1189, 1163),

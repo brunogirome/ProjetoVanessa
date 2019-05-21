@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -29,6 +31,8 @@ public class Control implements Constantes {
 
     public Android Android2;
 
+    public Android Android3;
+
     public static List<Areas> ListaAreas = new ArrayList<>();
 
     public static List<Eventos> ListaEventos = new ArrayList<>();
@@ -44,10 +48,20 @@ public class Control implements Constantes {
             System.out.println(rua.toString());
         }
 
-        ListaEventos.add(new Eventos(LISTAS_RUAS.get(0), TipoEventos.qArvore, 0.5));
+        ListaAreas.add(new Areas(0, 0, 300, 540, TipoEventos.chuva));
 
+        //ListaEventos.add(new Eventos(LISTAS_RUAS.get(0), TipoEventos.qArvore, 0.5));
         Android = new Android(new Usuario(1, "Ze", 500, 600), new JFrame());
         Android.revalidate();
+
+//        Android = new Android(new Usuario(2, "antony", 50, 80), new JFrame());
+//        Android.revalidate();
+//
+//        Android = new Android(new Usuario(3, "maria", 900, 600), new JFrame());
+//        Android.revalidate();
+
+        ListaEventos.add(new Eventos(LISTAS_RUAS.get(23), TipoEventos.qArvore, 0.2));
+        ListaEventos.add(new Eventos(LISTAS_RUAS.get(6), TipoEventos.qArvore, 0.132));
 //
 //        Android2 = new Android(new Usuario(2, "Zezinho zika", 900, 200), new JFrame());
 //        Android2.revalidate();
@@ -65,6 +79,7 @@ public class Control implements Constantes {
         }
 
         Horario = Control.FORMATO_HORA.format(hora) + ":" + Control.FORMATO_MIN.format(minutos);
+
 //        Android.repaint();
     }
 

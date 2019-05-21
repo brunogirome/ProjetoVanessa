@@ -83,7 +83,7 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
         // Primeira layer, câmera sobre as coordenadas do mapa.
         camera(g2d);
         // Layer de desenho de ruas
-        desenharRuas(g2d);
+        //desenharRuas(g2d);
         // Segunda layer, áreas como chuvas, alagamentos, e etc.
         desenharAreas(g2d);
         // Terceira layer, eventos, como queda de árvore, acidentes e etc.
@@ -136,6 +136,7 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
     @Override
     public void mouseReleased(MouseEvent e) {
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        //android.repaint();
     }
 
     @Override
@@ -154,19 +155,20 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
         int xMoved = (thisX + e.getX()) - (thisX + clickInicial.x);
         int yMoved = (thisY + e.getY()) - (thisY + clickInicial.y);
 
-        int x = thisX - (int) xMoved / 10;
-        int y = thisY - (int) yMoved / 10;
+        int x = thisX - (int) xMoved / 8;
+        int y = thisY - (int) yMoved / 8;
 
         cX = x;
         cY = y;
 
         setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
         android.repaint();
+
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
+       System.out.println("xy: " + e.getX() + ", " + e.getY());
     }
 
 }

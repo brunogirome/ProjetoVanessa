@@ -5,22 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Rotas {
+public class Rotas extends Conexoes {
 
-    /*
-     chuva,
-     tempestade,
-     alagamento,
-     qArvore,
-     qLuz,
-     acidente
-     */
     private int id;
     private String desc;
     private Time ini;
     private Time fim;
-    private Rua[] ruas;
+    private List<Rua> ruas;
     private boolean chuva;
     private boolean tempestade;
     private boolean alagamento;
@@ -57,6 +51,20 @@ public class Rotas {
                     rs.getTime("ROTA_INI"),
                     rs.getTime("ROTA_FIM")
             );
+        } catch (SQLException e) {
+            System.out.println("Erro ao subir rotas: " + e);
+        }
+
+    }
+
+    public void subirRotas2(List<Rotas> listaRotas, int idUser) {
+        try {
+            stmt = con.prepareStatement("SELECT * FROM ROTAS WHERE... ");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                listaRotas.add(new Rotas(idUser, null, null, null));
+            }
         } catch (SQLException e) {
             System.out.println("Erro ao subir rotas: " + e);
         }
