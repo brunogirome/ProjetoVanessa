@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 import ProjetoVanessa.Rua;
 
-public class Mapa extends Telas implements MouseListener, MouseMotionListener {
+public class AndroidMapa extends AndroidTela implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = -5395688902855962555L;
 
@@ -38,10 +38,10 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
         }
     };
 
-    public Mapa(JFrame frame) {
-        super(frame);
+    public AndroidMapa(Android android) {
+        super(android);
 
-        centralizarPonto(Android.InicialX, Android.InicialY);
+        centralizarPonto(android.getUser().getX(), android.getUser().getY());
 
         painelDashboard.addMouseListener(this);
         painelDashboard.addMouseMotionListener(this);
@@ -53,7 +53,7 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
     // Méotodo responsável pelo desenho do local em que o celular da aplicação se
     // encontra
     private void desenharLocalidade(Graphics2D g2d) {
-        Android.desenharObjeto(Android.InicialX, Android.InicialY, cX, cY, 48, g2d, "res\\lf.png");
+        Android.desenharObjeto(android.getUser().getX(), android.getUser().getY(), cX, cY, 48, g2d, "res\\lf.png");
     }
 
     // Método responsável pelo desenho dos eventos do mapa
@@ -71,7 +71,7 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
     }
 
     private void desenharRuas(Graphics2D g2d) {
-        for (Rua rua : Control.ListaRuas) {
+        for (Rua rua : Control.LISTAS_RUAS) {
             rua.desenharRua(g2d, cX, cY);
         }
     }
@@ -103,7 +103,7 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
     private void centralizarPonto(int x, int y) {
         cX = x - 150;
         cY = y - 270;
-        Control.Android.repaint();
+        android.repaint();
     }
 
     // Método utilizado para evitar erros ao carregar a sub-imagem do mapa
@@ -161,7 +161,7 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
         cY = y;
 
         setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-        Control.Android.repaint();
+        android.repaint();
     }
 
     @Override

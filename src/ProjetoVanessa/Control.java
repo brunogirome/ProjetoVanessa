@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -24,28 +25,32 @@ public class Control implements Constantes {
 
     public static String Horario = "00:00";
 
-    public static Android Android;
+    public Android Android;
+
+    public Android Android2;
 
     public static List<Areas> ListaAreas = new ArrayList<>();
 
     public static List<Eventos> ListaEventos = new ArrayList<>();
 
-    public static List<Rua> ListaRuas = new ArrayList<>();
+    public static final List<Rua> LISTAS_RUAS = new ArrayList<>();
 
     public Control() {
         new ControleClima();
 
-        ListaRuas.add(new Rua(1, "rua 1", 3, 3, 1194, 3));
+        Rua.carregarRuas();
 
-        System.out.println(ListaRuas.get(0).toString());
+        for (Rua rua : LISTAS_RUAS) {
+            System.out.println(rua.toString());
+        }
 
-        ListaEventos.add(new Eventos(ListaRuas.get(0), TipoEventos.qArvore, 0.5));
+        ListaEventos.add(new Eventos(LISTAS_RUAS.get(0), TipoEventos.qArvore, 0.5));
 
-        System.out.println(ListaEventos.get(0).toString());
-
-        Android = new Android(500, 880);
+        Android = new Android(new Usuario(1, "Ze", 500, 600), new JFrame());
         Android.revalidate();
-
+//
+//        Android2 = new Android(new Usuario(2, "Zezinho zika", 900, 200), new JFrame());
+//        Android2.revalidate();
         timer.start();
     }
 
@@ -60,7 +65,7 @@ public class Control implements Constantes {
         }
 
         Horario = Control.FORMATO_HORA.format(hora) + ":" + Control.FORMATO_MIN.format(minutos);
-        Android.repaint();
+//        Android.repaint();
     }
 
     protected Timer timer = new Timer(2000, new ActionListener() {
@@ -82,8 +87,7 @@ public class Control implements Constantes {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                | UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
             System.out.println("Erro no Look and Feel:\n" + e);
         }
         new Control();

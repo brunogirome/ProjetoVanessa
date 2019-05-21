@@ -17,12 +17,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Cadastro extends Telas implements MouseListener {
+public class AndroidCadastro extends AndroidTela implements MouseListener {
 
     private static final long serialVersionUID = -7980272468065386510L;
 
     int teste = 3;
-    
+
     private JPanel panelCadastro = new JPanel(null) {
         private static final long serialVersionUID = 1L;
 
@@ -66,8 +66,8 @@ public class Cadastro extends Telas implements MouseListener {
 
     private JButton botaoRegistrar = new JButton();
 
-    public Cadastro(JFrame frame) {
-        super(frame);
+    public AndroidCadastro(Android android) {
+        super(android);
 
         label.setBounds(0, 50, 300, 50);
         label.setFont(new Font("Century Gothic", 0, 40));
@@ -99,8 +99,7 @@ public class Cadastro extends Telas implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == labelBack) {
-            new Login(Android.Frame);
-
+            new AndroidLogin(android);
         }
     }
 

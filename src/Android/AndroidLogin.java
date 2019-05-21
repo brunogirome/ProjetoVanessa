@@ -17,7 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Login extends Telas implements MouseListener {
+public class AndroidLogin extends AndroidTela implements MouseListener {
 
     private static final long serialVersionUID = 2797310196318049029L;
 
@@ -53,8 +53,8 @@ public class Login extends Telas implements MouseListener {
 
     private JPasswordField campoPw = new JPasswordField();
 
-    public Login(JFrame frame) {
-        super(frame);
+    public AndroidLogin(Android android) {
+        super(android);
 
         criarCampo(campoLogin, "Usuário", new Rectangle(88, 295, 169, 30), fonteCampos, this, this);
 
@@ -80,13 +80,12 @@ public class Login extends Telas implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
         if (e.getSource() == entrar) {
-            new Mapa(Android.Frame);
+            new AndroidMapa(android);
         }
 
         if (e.getSource() == criarCadastro) {
-            new Cadastro(Android.Frame);
+            new AndroidCadastro(android);
         }
     }
 

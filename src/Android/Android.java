@@ -2,9 +2,13 @@ package Android;
 
 import ProjetoVanessa.Control;
 import ProjetoVanessa.Janela;
+import ProjetoVanessa.Rotas;
+import ProjetoVanessa.Usuario;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -14,26 +18,28 @@ public class Android extends JPanel {
 
     private static final long serialVersionUID = 4801318033194283596L;
 
-    public static JDesktopPane Ambiente;
+    public JDesktopPane Ambiente;
 
     public static final int LARGURA = 300, ALTURA = 600;
 
-    public static Login login;
-    public static Mapa dashboard;
+    public AndroidLogin login;
+    public AndroidMapa dashboard;
 
-    public static JFrame Frame;
-    public static int InicialX, InicialY;
+    public JFrame frame;
 
-    public Android(int x, int y) {
+    public List<Rotas> rotasUser = new ArrayList<>();
 
-        Android.InicialX = x;
-        Android.InicialY = y;
+    private Usuario user;
 
-        Frame = new JFrame();
-        Frame.setIconImage(new ImageIcon("res\\ficon.png").getImage());
+    public Android(Usuario user, JFrame frame) {
+
+        this.user = user;
+        this.frame = frame;
+        frame.setIconImage(new ImageIcon("res\\ficon.png").getImage());
 
         Ambiente = new JDesktopPane();
-        login = new Login(Frame);
+
+        login = new AndroidLogin(this);
 
         Dimension aSize = new Dimension(300, 600);
 
@@ -46,12 +52,16 @@ public class Android extends JPanel {
 
         this.add(Ambiente);
 
-        new Janela(Frame, this, "Celular", LARGURA, ALTURA, JFrame.DISPOSE_ON_CLOSE, true);
+        new Janela(frame, this, "Celular", LARGURA, ALTURA, JFrame.DISPOSE_ON_CLOSE, true);
     }
 
     public static void desenharObjeto(int x, int y, int cX, int cY, int tamImagem, Graphics2D g2d, String localImagem) {
         if (cX < (x + tamImagem / 2) && cY < y) {
             g2d.drawImage(Control.buscarImagem(localImagem), x - cX - (tamImagem / 2), (20 + y) - cY - tamImagem, tamImagem, tamImagem, null);
         }
+    }
+
+    public Usuario getUser() {
+        return this.user;
     }
 }

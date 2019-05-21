@@ -21,11 +21,11 @@ import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.text.JTextComponent;
 
-public abstract class Telas extends JInternalFrame {
+public abstract class AndroidTela extends JInternalFrame {
 
     private static final long serialVersionUID = 8883926225504151747L;
 
-    public static JPanel painelTopo = new JPanel(null) {
+    protected JPanel painelTopo = new JPanel(null) {
         @Override
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
@@ -41,9 +41,12 @@ public abstract class Telas extends JInternalFrame {
 
     protected JLabel labelBack = new JLabel();
 
-    public Telas(JFrame frame) {
-        Android.Ambiente.removeAll();
-        Android.Ambiente.add(this);
+    protected Android android;
+
+    public AndroidTela(Android android) {
+        this.android = android;
+        android.Ambiente.removeAll();
+        android.Ambiente.add(this);
 
         this.setLayout(null);
         this.setBorder(null);
@@ -53,7 +56,7 @@ public abstract class Telas extends JInternalFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getX() > 280) {
-                    frame.dispose();
+                    android.frame.dispose();
                 }
             }
 
@@ -90,7 +93,7 @@ public abstract class Telas extends JInternalFrame {
                 int x = e.getXOnScreen();
                 int y = e.getYOnScreen();
 
-                frame.setLocation(x - xx, y - xy);
+                android.frame.setLocation(x - xx, y - xy);
             }
 
             @Override

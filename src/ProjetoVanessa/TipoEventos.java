@@ -7,6 +7,7 @@ public enum TipoEventos {
     alagamento,
     qArvore,
     qLuz,
+    qPoste,
     acidente
 
 }
