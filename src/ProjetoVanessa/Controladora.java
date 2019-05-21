@@ -37,20 +37,12 @@ public class Controladora extends JPanel implements ActionListener {
         this.add(btn);
     }
 
-    
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btn) {
-            Control.ListaAreas.add(
-                    new Areas(
-                            Integer.parseInt(xic.getText()),
-                            Integer.parseInt(yic.getText()),
-                            Integer.parseInt(xfc.getText()),
-                            Integer.parseInt(yfc.getText()),
-                            TipoEventos.chuva
-                    )
-            );
+            Control.ListaAreas.add(new Areas(Integer.parseInt(xic.getText()), Integer.parseInt(yic.getText()),
+                    Integer.parseInt(xfc.getText()), Integer.parseInt(yfc.getText()), TipoEventos.chuva));
             Control.Android.repaint();
         }
     }

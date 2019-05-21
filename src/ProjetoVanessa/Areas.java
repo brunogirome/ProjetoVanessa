@@ -29,7 +29,6 @@ public class Areas {
     }
 
     public void desenharArea(Graphics2D g2d, int cX, int cY) {
-
         //RuaX < areax + areaw
         if ((cX < comp + x && cY < altu + y)) {
             g2d.setColor(c1);

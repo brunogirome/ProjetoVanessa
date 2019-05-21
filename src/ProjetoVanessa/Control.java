@@ -30,12 +30,20 @@ public class Control implements Constantes {
 
     public static List<Eventos> ListaEventos = new ArrayList<>();
 
-    public Control() {
-        // new Controladora();
+    public static List<Rua> ListaRuas = new ArrayList<>();
 
+    public Control() {
         new ControleClima();
 
-        Android = new Android(300, 540);
+        ListaRuas.add(new Rua(1, "rua 1", 3, 3, 1194, 3));
+
+        System.out.println(ListaRuas.get(0).toString());
+
+        ListaEventos.add(new Eventos(ListaRuas.get(0), TipoEventos.qArvore, 0.5));
+
+        System.out.println(ListaEventos.get(0).toString());
+
+        Android = new Android(500, 880);
         Android.revalidate();
 
         timer.start();

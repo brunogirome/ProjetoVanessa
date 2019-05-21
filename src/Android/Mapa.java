@@ -3,7 +3,7 @@ package Android;
 import ProjetoVanessa.Areas;
 import ProjetoVanessa.Control;
 import ProjetoVanessa.Eventos;
-import ProjetoVanessa.TipoEventos;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -13,11 +13,13 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ProjetoVanessa.Rua;
+
 public class Mapa extends Telas implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = -5395688902855962555L;
 
-    //“Câmera X”, “Câmera Y”, pontos iniciar de renderização da sub-imagem do mapa
+    // “Câmera X”, “Câmera Y”, pontos iniciar de renderização da sub-imagem do mapa
     private int cX, cY;
 
     private Point clickInicial;
@@ -25,7 +27,6 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
     private final JPanel painelDashboard = new JPanel(null) {
         private static final long serialVersionUID = 1L;
 
-        
         @Override
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
@@ -33,16 +34,13 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
             renderizarMapa(g2d);
 
             desenharFundo(g2d);
-            
-             
+
         }
     };
 
     public Mapa(JFrame frame) {
         super(frame);
-        
-         
-        
+
         centralizarPonto(Android.InicialX, Android.InicialY);
 
         painelDashboard.addMouseListener(this);
@@ -52,52 +50,63 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
         this.add(painelDashboard);
     }
 
-    //Méotodo responsável pelo desenho do local em que o celular da aplicação se encontra
+    // Méotodo responsável pelo desenho do local em que o celular da aplicação se
+    // encontra
     private void desenharLocalidade(Graphics2D g2d) {
         Android.desenharObjeto(Android.InicialX, Android.InicialY, cX, cY, 48, g2d, "res\\lf.png");
     }
 
-    //Método responsável pelo desenho dos eventos do mapa
+    // Método responsável pelo desenho dos eventos do mapa
     private void desenharEventos(Graphics2D g2d) {
         for (Eventos evento : Control.ListaEventos) {
             evento.desenharEvento(g2d, cX, cY);
         }
     }
 
-    //Método responsável pelo desenho das áreas
+    // Método responsável pelo desenho das áreas
     private void desenharAreas(Graphics2D g2d) {
         for (Areas area : Control.ListaAreas) {
-            area.desenharArea(g2d, Control.ListaAreas, TipoEventos.chuva, cX, cY);
+            area.desenharArea(g2d, cX, cY);
         }
     }
 
-    //Método que une todas as classes que desenham objetos no mapa, em suas respectivas ordens de camada. 
-    //(Os métodos desenhados por último fica por cima dos primeiros).
+    private void desenharRuas(Graphics2D g2d) {
+        for (Rua rua : Control.ListaRuas) {
+            rua.desenharRua(g2d, cX, cY);
+        }
+    }
+
+    // Método que une todas as classes que desenham objetos no mapa, em suas
+    // respectivas ordens de camada.
+    // (Os métodos desenhados por último fica por cima dos primeiros).
     private void renderizarMapa(Graphics2D g2d) {
-        //Primeira layer, câmera sobre as coordenadas do mapa.
+        // Primeira layer, câmera sobre as coordenadas do mapa.
         camera(g2d);
-        //Segunda layer, áreas como chuvas, alagamentos, e etc.
+        // Layer de desenho de ruas
+        desenharRuas(g2d);
+        // Segunda layer, áreas como chuvas, alagamentos, e etc.
         desenharAreas(g2d);
-        //Terceira layer, eventos, como queda de árvore, acidentes e etc.
+        // Terceira layer, eventos, como queda de árvore, acidentes e etc.
         desenharEventos(g2d);
-        //Quarta layer, posicionamento atual do GPS.
+        // Quarta layer, posicionamento atual do GPS.
         desenharLocalidade(g2d);
     }
 
-    //Método responsável pela visualização de uma determinada parte do mapa, que é controlada pelo mouse
+    // Método responsável pela visualização de uma determinada parte do mapa, que é
+    // controlada pelo mouse
     private void camera(Graphics2D g2d) {
         limitarCamera();
         g2d.drawImage(Control.buscarImagem("res\\cidade.png").getSubimage(cX, cY, 300, 540), 0, 21, 300, 540, null);
     }
 
-    //Metódo utilizado para centralizar a câmera em um certo ponto
+    // Metódo utilizado para centralizar a câmera em um certo ponto
     private void centralizarPonto(int x, int y) {
         cX = x - 150;
         cY = y - 270;
         Control.Android.repaint();
     }
 
-    //Método utilizado para evitar erros ao carregar a sub-imagem do mapa
+    // Método utilizado para evitar erros ao carregar a sub-imagem do mapa
     private void limitarCamera() {
         if (cX > 900) {
             cX = 900;
@@ -126,7 +135,7 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
     @Override
@@ -151,6 +160,7 @@ public class Mapa extends Telas implements MouseListener, MouseMotionListener {
         cX = x;
         cY = y;
 
+        setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
         Control.Android.repaint();
     }
 

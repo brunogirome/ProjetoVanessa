@@ -49,9 +49,9 @@ public class Android extends JPanel {
         new Janela(Frame, this, "Celular", LARGURA, ALTURA, JFrame.DISPOSE_ON_CLOSE, true);
     }
 
-    public static void desenharObjeto(int x, int y, int xMapa, int yMapa, int tamImagem, Graphics2D g2d, String localImagem) {
-        if (xMapa < (x + tamImagem / 2) && yMapa < y) {
-            g2d.drawImage(Control.buscarImagem(localImagem), x - xMapa - (tamImagem / 2), (20 + y) - yMapa, tamImagem, tamImagem, null);
+    public static void desenharObjeto(int x, int y, int cX, int cY, int tamImagem, Graphics2D g2d, String localImagem) {
+        if (cX < (x + tamImagem / 2) && cY < y) {
+            g2d.drawImage(Control.buscarImagem(localImagem), x - cX - (tamImagem / 2), (20 + y) - cY - tamImagem, tamImagem, tamImagem, null);
         }
     }
 }
