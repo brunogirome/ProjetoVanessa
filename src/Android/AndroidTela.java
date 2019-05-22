@@ -6,11 +6,21 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.PathIterator;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -29,6 +39,7 @@ public abstract class AndroidTela extends JInternalFrame {
         @Override
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
+            renderHints(g2d);
             g2d.drawImage(Control.buscarImagem("res\\top.png"), 0, 0, 300, 10, null);
         }
     };
@@ -191,6 +202,46 @@ public abstract class AndroidTela extends JInternalFrame {
         criarCampo(campo, r, font, mouse, painel);
         criarPlaceHolder(colorp, campo, texto, font, painel);
         campo.setForeground(color);
+    }
+
+    protected void renderHints(Graphics2D g2d) {
+        g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
+    }
+
+    private int sN(int p, int d) {
+        return (p - d);
+    }
+
+    private int sS(int p, int d) {
+        return (p + d);
+    }
+
+    private int sE(int p, int d) {
+        return (p + d);
+    }
+
+    private int sW(int p, int d) {
+        return (p - d);
+    }
+
+    protected void desenharStroke(Graphics2D g2d, String text, int x, int y, int strokeSize, Color corTexto, Color corStroke) {
+        g2d.setColor(corStroke);
+        g2d.drawString(text, sW(x, strokeSize), sN(y, strokeSize));
+        g2d.drawString(text, sW(x, strokeSize), sS(y, strokeSize));
+        g2d.drawString(text, sE(x, strokeSize), sN(y, strokeSize));
+        g2d.drawString(text, sE(x, strokeSize), sS(y, strokeSize));
+
+        g2d.setColor(corTexto);
+        g2d.drawString(text, x, y);
+        
     }
 
 }

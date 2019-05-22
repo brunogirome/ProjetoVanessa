@@ -18,4 +18,6 @@ public interface Constantes {
     public final static Color CINZAESC = new Color(18, 18, 18);
     public final static Color CINZATOPO = new Color(55, 55, 55);
 
+    public static final String Century = "Century Gothic";
+
 }

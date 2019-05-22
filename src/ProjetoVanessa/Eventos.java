@@ -29,7 +29,6 @@ public class Eventos {
             this.y = rua.getY() + 2;
         } else {
         }
-
     }
 
     public Rectangle getBounds() {
