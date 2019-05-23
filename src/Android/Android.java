@@ -31,10 +31,17 @@ public class Android extends JPanel {
 
     private Usuario user;
 
-    public Android(Usuario user, JFrame frame) {
+    private int temp;
+    private float porcenChuva;
+    private int vento;
 
+    public Android(Usuario user, JFrame frame, int temp, float porcenChuva, int vento) {
         this.user = user;
         this.frame = frame;
+
+        this.temp = temp;
+        this.porcenChuva = porcenChuva;
+        this.vento = vento;
         frame.setIconImage(new ImageIcon("res\\ficon.png").getImage());
 
         Ambiente = new JDesktopPane();
@@ -53,6 +60,7 @@ public class Android extends JPanel {
         this.add(Ambiente);
 
         new Janela(frame, this, "Celular", LARGURA, ALTURA, JFrame.DISPOSE_ON_CLOSE, true);
+        frame.createBufferStrategy(2);
     }
 
     public static void desenharObjeto(int x, int y, int cX, int cY, int tamImagem, Graphics2D g2d, String localImagem) {
@@ -64,4 +72,17 @@ public class Android extends JPanel {
     public Usuario getUser() {
         return this.user;
     }
+
+    public int getTemp() {
+        return temp;
+    }
+
+    public float getPorcenChuva() {
+        return porcenChuva;
+    }
+
+    public int getVento() {
+        return vento;
+    }
+
 }

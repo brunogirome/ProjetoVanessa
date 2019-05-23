@@ -45,11 +45,9 @@ public class Control implements Constantes {
 ////        for (Rua rua : LISTAS_RUAS) {
 ////            System.out.println(rua.toString());
 ////        }
-
         //ListaAreas.add(new Areas(0, 0, 300, 540, TipoEventos.chuva));
-
         //ListaEventos.add(new Eventos(LISTAS_RUAS.get(0), TipoEventos.qArvore, 0.5));
-        Android = new Android(new Usuario(1, "Ze", LISTAS_RUAS.get(5), 0.3), new JFrame());
+        Android = new Android(new Usuario(1, "Ze", LISTAS_RUAS.get(5), 0.3), new JFrame(), 42, 0.1f, 10);
         Android.revalidate();
 
 //        Android = new Android(new Usuario(2, "antony", 50, 80), new JFrame());
@@ -98,11 +96,12 @@ public class Control implements Constantes {
     }
 
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
-            System.out.println("Erro no Look and Feel:\n" + e);
-        }
+//        try {
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+//            System.out.println("Erro no Look and Feel:\n" + e);
+//        }
+        Thread.currentThread().setPriority((int) (Thread.MAX_PRIORITY * 0.8));
         new Control();
 
     }

@@ -232,16 +232,16 @@ public abstract class AndroidTela extends JInternalFrame {
         return (p - d);
     }
 
-    protected void desenharStroke(Graphics2D g2d, String text, int x, int y, int strokeSize, Color corTexto, Color corStroke) {
+    protected void desenharStroke(Graphics2D g2d, String text, int x, int y, Color corTexto, Color corStroke) {
         g2d.setColor(corStroke);
-        g2d.drawString(text, sW(x, strokeSize), sN(y, strokeSize));
-        g2d.drawString(text, sW(x, strokeSize), sS(y, strokeSize));
-        g2d.drawString(text, sE(x, strokeSize), sN(y, strokeSize));
-        g2d.drawString(text, sE(x, strokeSize), sS(y, strokeSize));
+        g2d.drawString(text, sW(x, 1), sN(y, 1));
+        g2d.drawString(text, sW(x, 1), sS(y, 1));
+        g2d.drawString(text, sE(x, 1), sN(y, 1));
+        g2d.drawString(text, sE(x, 1), sS(y, 1));
 
         g2d.setColor(corTexto);
         g2d.drawString(text, x, y);
-        
+
     }
 
 }

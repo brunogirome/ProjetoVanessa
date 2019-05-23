@@ -45,7 +45,7 @@ public class Janela {
         painel.setMinimumSize(tamanho);
         painel.setMaximumSize(tamanho);
         painel.setPreferredSize(tamanho);
-
+////
 ////        JPanel shadowPanel = new JPanel(new BorderLayout()) {
 ////            @Override
 ////            protected void paintComponent(Graphics g) {
@@ -60,15 +60,16 @@ public class Janela {
 ////
 ////        shadowPanel.setOpaque(false);
 ////        shadowPanel.setBackground(Color.BLACK);
-////        shadowPanel.setBorder(new EmptyBorder(0, 0, 5, 5));
-        //painel.setLayout(new GridLayout(1, 1));
+////        shadowPanel.setBorder(new EmptyBorder(0, 0, 20, 20));
+////        painel.setLayout(new GridLayout(1, 1));
+        
         painel.setLayout(null);
 
         frame.setDefaultCloseOperation(closeOP);
         frame.setResizable(false);
         frame.setContentPane(painel);
-//        frame.setContentPane(shadowPanel);
-//        shadowPanel.add(painel);
+////        frame.setContentPane(shadowPanel);
+////        shadowPanel.add(painel);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.repaint();

@@ -11,16 +11,15 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import ProjetoVanessa.Rua;
 import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferStrategy;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class AndroidMapa extends AndroidTela implements MouseListener, MouseMotionListener, Constantes {
@@ -34,22 +33,31 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
 
     public boolean abrirSidePanel = false;
 
-    private final JPanel painelDashboard = new JPanel(null) {
+    private final Canvas painelDashboard = new Canvas(null) {
         private static final long serialVersionUID = 1L;
 
         @Override
-        public void paintComponent(Graphics g) {
+        public void paint(Graphics g) {
+            BufferStrategy bs = painelDashboard.getBufferStrategy();
+            if (bs == null) {
+                this.createBufferStrategy(3);
+                return;
+            }
+            g = bs.getDrawGraphics();
             Graphics2D g2d = (Graphics2D) g;
+
+            renderHints(g2d);
 
             renderizarMapa(g2d);
 
             desenharFundo(g2d);
 
-            renderHints(g2d);
-
             desenharPainel(g2d, 0, 486, 300, 64);
 
             sidePanel(g2d, abrirSidePanel);
+
+            g.dispose();
+            bs.show();
         }
     };
 
@@ -90,19 +98,25 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
         g2d.setColor(AZUL1);
         g2d.fillRect(h, y, w - 64, h);
 
-        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.1));
+        //chuva        
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) android.getPorcenChuva()));
         g2d.drawImage(Control.buscarImagem("res\\cpbw.png"), w - 64, y + 8, 48, 48, null);
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+        g2d.setFont(new Font(Century, 0, 32));
+        desenharStroke(g2d, FORMATO_MIN.format((android.getPorcenChuva() * 100)), w - 58, y + 38, new Color(22, 163, 224), Color.black);
+        g2d.setFont(new Font(Century, 0, 18));
+        desenharStroke(g2d, "%", w - 44, y + 56, new Color(22, 163, 224), Color.black);
+        //vento
         g2d.drawImage(Control.buscarImagem("res\\vp.png"), w - 64 - 48 - 8, y + 8, 48, 48, null);
-
-//        g2d.setColor(Color.DARK_GRAY);
-//        g2d.setStroke(new BasicStroke(1.0f));
-//        g2d.draw();
-//        
+        g2d.setFont(new Font(Century, 0, 32));
+        desenharStroke(g2d, android.getVento() + "", w - 110, y + 38, Color.lightGray, Color.black);
+        g2d.setFont(new Font(Century, 0, 18));
+        desenharStroke(g2d, "km/h", w - 112, y + 56, Color.lightGray, Color.black);
+        //temp
         g2d.setColor(Color.black);
         g2d.setFont(new Font(Century, 0, 48));
+        desenharStroke(g2d, android.getTemp() + "º", h + 16, 535, Color.white, Color.black);
 
-        desenharStroke(g2d, 13 + "º", h + 16, 535, 1, Color.white, Color.black);
         g2d.drawImage(Control.buscarImagem("res\\mpm.png"), x + 8, y + 8, 48, 48, null);
 
     }
@@ -133,7 +147,6 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
     // controlada pelo mouse
     private void camera(Graphics2D g2d) {
         limitarCamera();
-        //g2d.drawImage(Control.buscarImagem("res\\cidade.png").getSubimage(cX, cY, 300, 540), 0, 21, 300, 540, null);
         g2d.drawImage(Control.buscarImagem("res\\cidade.png").getSubimage(cX, cY, 300, 476), 0, 21, 300, 476, null);
     }
 
@@ -166,6 +179,13 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
             g2d.fillRect(0, 20, 300, 530);
             g2d.setColor(Color.white);
             g2d.fillRect(xSP, 20, 255, 530);
+
+            g2d.setColor(Color.black);
+            g2d.fillRect(xSP, 70, 255, 2);
+            g2d.setFont(fonteCampos);
+            g2d.drawString("Registros", xSP + 30, 85);
+            g2d.fillRect(xSP, 90, 255, 2);
+
         } else {
             xSP = -255;
         }
@@ -196,8 +216,9 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
             System.out.println("ta clicado chefe, e o boolean tá: " + abrirSidePanel);
         } else if (e.getX() > 255 && e.getY() > 20 && e.getY() < 550 && abrirSidePanel) {
             this.abrirSidePanel = !this.abrirSidePanel;
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 70 && e.getY() < 90 && abrirSidePanel) {
+            new AndroidRota(android);
         }
-
     }
 
     @Override
@@ -209,7 +230,6 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
     @Override
     public void mouseReleased(MouseEvent e) {
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        //android.repaint();
     }
 
     @Override
