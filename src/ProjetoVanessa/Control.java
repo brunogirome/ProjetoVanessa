@@ -70,10 +70,11 @@ public class Control implements Constantes {
         for (Android android : ListaAndroid) {
             for (Rotas rota : android.rotasUser) {
                 if (rota.getIni().getTime() <= Horario.getTime() && rota.getFim().getTime() >= Horario.getTime()) {
-                    System.out.println(rota.getDesc() + " está dentro do escopo");
+                    System.out.println(rota.getDesc() + " está sendo analizada.");
                     for (Rua rua : rota.getRuas()) {
                         for (Eventos eventos : ListaEventos) {
                             if (rua.getBounds().intersects(eventos.getBounds())) {
+                                rota.setAlertar(true);
                                 if (eventos.getTipo() == TipoEventos.alagamento) {
                                     rota.setAlagamento(true);
                                 } else if (eventos.getTipo() == TipoEventos.tempestade) {
@@ -105,6 +106,8 @@ public class Control implements Constantes {
                                 } else {
                                     rota.setqLuz(false);
                                 }
+                            } else {
+                                rota.setAlertar(false);
                             }
                         }
                     }
@@ -114,8 +117,6 @@ public class Control implements Constantes {
         }
     }
 
-    private Time ht = new Time(0, 3, 0);
-
     protected Timer timer = new Timer(2000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -123,12 +124,7 @@ public class Control implements Constantes {
 
             System.out.println("------------------------");
             System.out.println("Hora atual: " + Horario.toString() + ", em LONG: " + Horario.getTime());
-            System.out.println("Hora test: " + ht.toString() + ", em LONG: " + ht.getTime());
             System.out.println("------------------------");
-
-            if (Horario.getTime() > ht.getTime()) {
-                System.out.println("TEST ATIVO");
-            }
         }
     });
 

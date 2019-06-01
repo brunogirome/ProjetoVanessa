@@ -54,6 +54,26 @@ public class AndroidRota extends AndroidTela implements ProjetoVanessa.Constante
         elementosTela();
     }
 
+    private void paineisRota(Graphics2D g2d) {
+        for (Rotas rota : android.rotasUser) {
+
+        }
+    }
+
+    private void painelRota(Graphics2D g2d, Rotas rota, int i) {
+        Color bgcolor = Color.GREEN;
+        if (rota.isAlertar()) {
+            if (rota.isAlagamento()) {
+                bgcolor = Color.pink;
+            } else if (rota.isTempestade()) {
+                bgcolor = Color.gray;
+            } else if (rota.isChuva()) {
+                bgcolor = Color.BLUE;
+            }
+        }
+        g2d.fillRect(10, 30 + (i * 124), 280, 124);
+    }
+
     private void elementosTela() {
         labelRota(labelNome, 20, 80, 260, 20);
         fieldRota(fieldNome, 20, 100, 260, 30);
