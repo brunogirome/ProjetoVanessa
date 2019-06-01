@@ -7,10 +7,10 @@ public class Eventos {
 
     private int x = 0;
     private int y = 0;
-    private TipoEventos evento;
-    private final int TAM_IMAGEM = 24;
-    private Rua rua;
-    private double desloc;
+    private final TipoEventos evento;
+    private final int TAM_IMAGEM = 36;
+    private final Rua rua;
+    private final double desloc;
 
     public Eventos(Rua rua, TipoEventos evento, double desloc) {
         this.rua = rua;
@@ -45,6 +45,10 @@ public class Eventos {
 
     public int getY() {
         return this.y;
+    }
+
+    public TipoEventos getTipo() {
+        return this.evento;
     }
 
     @Override

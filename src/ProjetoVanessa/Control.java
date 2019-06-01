@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -19,17 +20,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class Control implements Constantes {
 
-    // https://leafletjs.com/examples/quick-start/
-    public static int hora = 1;
+    public static int hora = 0;
     public static int minutos = 0;
 
-    public static String Horario = "00:00";
-
-    public Android Android;
-
-    public Android Android2;
-
-    public Android Android3;
+    public static Time Horario = updateHora();
 
     public static List<Areas> ListaAreas = new ArrayList<>();
 
@@ -37,31 +31,17 @@ public class Control implements Constantes {
 
     public static final List<Rua> LISTAS_RUAS = new ArrayList<>();
 
-    public Control() {
-        new ControleClima();
+    public static List<Android> ListaAndroid = new ArrayList<>();
 
+    public Control() {
+        //new ControleClima();
         Rua.carregarRuas();
 
-////        for (Rua rua : LISTAS_RUAS) {
-////            System.out.println(rua.toString());
-////        }
-        //ListaAreas.add(new Areas(0, 0, 300, 540, TipoEventos.chuva));
-        //ListaEventos.add(new Eventos(LISTAS_RUAS.get(0), TipoEventos.qArvore, 0.5));
-        Android = new Android(new Usuario(1, "Ze", LISTAS_RUAS.get(5), 0.3), new JFrame(), 42, 0.1f, 10);
-        Android.revalidate();
+        ListaAndroid.add(new Android(new Usuario(0, "João", LISTAS_RUAS.get(24), 0.7), new JFrame(), 23, 0.5f, 10));
 
-//        Android = new Android(new Usuario(2, "antony", 50, 80), new JFrame());
-//        Android.revalidate();
-//
-//        Android = new Android(new Usuario(3, "maria", 900, 600), new JFrame());
-//        Android.revalidate();
-        ListaEventos.add(new Eventos(LISTAS_RUAS.get(23), TipoEventos.qArvore, 0.2));
-        ListaEventos.add(new Eventos(LISTAS_RUAS.get(6), TipoEventos.qArvore, 0.132));
-//
-//        Android2 = new Android(new Usuario(2, "Zezinho zika", 900, 200), new JFrame());
-//        Android2.revalidate();
+        ListaEventos.add(new Eventos(LISTAS_RUAS.get(23), TipoEventos.qArvore, 0.9));
+
         timer.start();
-
     }
 
     private void atualizarHora() {
@@ -74,15 +54,81 @@ public class Control implements Constantes {
             }
         }
 
-        Horario = Control.FORMATO_HORA.format(hora) + ":" + Control.FORMATO_MIN.format(minutos);
+        for (Android android : ListaAndroid) {
+            android.repaint();
+        }
 
-//        Android.repaint();
+        Horario = updateHora();
+        checarRotas();
     }
+
+    private static Time updateHora() {
+        return Time.valueOf(FORMATO_HORA.format(hora) + ":" + FORMATO_MIN.format(minutos) + ":00");
+    }
+
+    private void checarRotas() {
+        for (Android android : ListaAndroid) {
+            for (Rotas rota : android.rotasUser) {
+                if (rota.getIni().getTime() <= Horario.getTime() && rota.getFim().getTime() >= Horario.getTime()) {
+                    System.out.println(rota.getDesc() + " está dentro do escopo");
+                    for (Rua rua : rota.getRuas()) {
+                        for (Eventos eventos : ListaEventos) {
+                            if (rua.getBounds().intersects(eventos.getBounds())) {
+                                if (eventos.getTipo() == TipoEventos.alagamento) {
+                                    rota.setAlagamento(true);
+                                } else if (eventos.getTipo() == TipoEventos.tempestade) {
+                                    rota.setTempestade(true);
+                                } else if (eventos.getTipo() == TipoEventos.chuva) {
+                                    rota.setChuva(true);
+                                } else {
+                                    rota.setAlagamento(false);
+                                    rota.setTempestade(false);
+                                    rota.setChuva(false);
+                                }
+                                if (eventos.getTipo() == TipoEventos.qArvore) {
+                                    rota.setqArvore(true);
+                                } else {
+                                    rota.setqArvore(false);
+                                }
+                                if (eventos.getTipo() == TipoEventos.qPoste) {
+                                    rota.setqPoste(true);
+                                } else {
+                                    rota.setqPoste(false);
+                                }
+                                if (eventos.getTipo() == TipoEventos.acidente) {
+                                    rota.setAcidente(true);
+                                } else {
+                                    rota.setAcidente(false);
+                                }
+                                if (eventos.getTipo() == TipoEventos.qLuz) {
+                                    rota.setqLuz(true);
+                                } else {
+                                    rota.setqLuz(false);
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    private Time ht = new Time(0, 3, 0);
 
     protected Timer timer = new Timer(2000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             atualizarHora();
+
+            System.out.println("------------------------");
+            System.out.println("Hora atual: " + Horario.toString() + ", em LONG: " + Horario.getTime());
+            System.out.println("Hora test: " + ht.toString() + ", em LONG: " + ht.getTime());
+            System.out.println("------------------------");
+
+            if (Horario.getTime() > ht.getTime()) {
+                System.out.println("TEST ATIVO");
+            }
         }
     });
 
@@ -96,14 +142,12 @@ public class Control implements Constantes {
     }
 
     public static void main(String[] args) {
-//        try {
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
-//            System.out.println("Erro no Look and Feel:\n" + e);
-//        }
-        Thread.currentThread().setPriority((int) (Thread.MAX_PRIORITY * 0.8));
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
+            System.out.println("Erro no Look and Feel:\n" + e);
+        }
         new Control();
-
     }
 
 }

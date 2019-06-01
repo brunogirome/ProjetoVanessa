@@ -1,5 +1,6 @@
 package Android;
 
+import ProjetoVanessa.Constantes;
 import ProjetoVanessa.Control;
 import java.awt.Color;
 import java.awt.Font;
@@ -14,13 +15,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
-import java.awt.font.TextLayout;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -31,7 +25,7 @@ import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.text.JTextComponent;
 
-public abstract class AndroidTela extends JInternalFrame {
+public abstract class AndroidTela extends JInternalFrame implements Constantes {
 
     private static final long serialVersionUID = 8883926225504151747L;
 
@@ -143,7 +137,7 @@ public abstract class AndroidTela extends JInternalFrame {
         g2d.drawImage(Control.buscarImagem("res\\wsb.png"), 217, 0, 42, 20, null);
 
         g2d.setColor(Color.white);
-        g2d.drawString(ProjetoVanessa.Control.Horario, 265, 14);
+        g2d.drawString(Constantes.fmtHora.format(Control.Horario), 265, 14);
     }
 
     private void criarPlaceHolder(Color color, JTextComponent campo, String texto, Font font, JComponent painel) {
@@ -207,13 +201,6 @@ public abstract class AndroidTela extends JInternalFrame {
     protected void renderHints(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
-        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-
     }
 
     private int sN(int p, int d) {

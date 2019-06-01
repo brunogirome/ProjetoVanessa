@@ -11,14 +11,11 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import ProjetoVanessa.Rua;
 import java.awt.AlphaComposite;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferStrategy;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -33,31 +30,22 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
 
     public boolean abrirSidePanel = false;
 
-    private final Canvas painelDashboard = new Canvas(null) {
+    private final JPanel painelMapa = new JPanel(null) {
         private static final long serialVersionUID = 1L;
 
         @Override
-        public void paint(Graphics g) {
-            BufferStrategy bs = painelDashboard.getBufferStrategy();
-            if (bs == null) {
-                this.createBufferStrategy(3);
-                return;
-            }
-            g = bs.getDrawGraphics();
+        public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
-
-            renderHints(g2d);
 
             renderizarMapa(g2d);
 
             desenharFundo(g2d);
 
+            renderHints(g2d);
             desenharPainel(g2d, 0, 486, 300, 64);
 
             sidePanel(g2d, abrirSidePanel);
-
-            g.dispose();
-            bs.show();
+            desenharRect(g2d);
         }
     };
 
@@ -66,11 +54,11 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
 
         centralizarPonto(android.getUser().getX(), android.getUser().getY());
 
-        painelDashboard.addMouseListener(this);
-        painelDashboard.addMouseMotionListener(this);
-        painelDashboard.setBounds(tamanhoTela);
+        painelMapa.addMouseListener(this);
+        painelMapa.addMouseMotionListener(this);
+        painelMapa.setBounds(tamanhoTela);
 
-        this.add(painelDashboard);
+        this.add(painelMapa);
     }
 
     // Méotodo responsável pelo desenho do local em que o celular da aplicação se
@@ -118,13 +106,6 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
         desenharStroke(g2d, android.getTemp() + "º", h + 16, 535, Color.white, Color.black);
 
         g2d.drawImage(Control.buscarImagem("res\\mpm.png"), x + 8, y + 8, 48, 48, null);
-
-    }
-
-    private void desenharRuas(Graphics2D g2d) {
-        for (Rua rua : Control.LISTAS_RUAS) {
-            rua.desenharRua(g2d, cX, cY);
-        }
     }
 
     // Método que une todas as classes que desenham objetos no mapa, em suas
@@ -180,16 +161,22 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
             g2d.setColor(Color.white);
             g2d.fillRect(xSP, 20, 255, 530);
 
-            g2d.setColor(Color.black);
-            g2d.fillRect(xSP, 70, 255, 2);
-            g2d.setFont(fonteCampos);
-            g2d.drawString("Registros", xSP + 30, 85);
-            g2d.fillRect(xSP, 90, 255, 2);
+            g2d.setColor(Color.lightGray);
+            g2d.fillRect(xSP, 70, 255, 1);
+            g2d.setColor(CINZAESC);
+            g2d.setFont(new Font(Century, 0, 18));
+            g2d.drawImage(Control.buscarImagem("res\\spAdd.png"), xSP + 10, 91, 24, 24, null);
+            g2d.drawString("Adicionar Rota", xSP + 45, 110);
+            g2d.drawImage(Control.buscarImagem("res\\spVis.png"), xSP + 10, 141, 24, 24, null);
+            g2d.drawString("Suas Rotas", xSP + 45, 160);
+            g2d.drawImage(Control.buscarImagem("res\\spInfo.png"), xSP + 10, 191, 24, 24, null);
+            g2d.drawString("Sobre", xSP + 45, 210);
+            //g2d.fillRect(xSP, 90, 255, 2);
 
         } else {
             xSP = -255;
         }
-        this.repaint();
+        painelMapa.repaint();
     }
 
     // Método utilizado para evitar erros ao carregar a sub-imagem do mapa
@@ -200,7 +187,7 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
         if (cX < 0) {
             cX = 0;
         }
-        if (cY > 724) {//660
+        if (cY > 724) {
             cY = 724;
         }
         if (cY < 0) {
@@ -213,18 +200,21 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
         if (e.getX() < 64 && e.getY() > 486 && e.getY() < 550 && !abrirSidePanel) {
             this.abrirSidePanel = !this.abrirSidePanel;
             timerSP.start();
-            System.out.println("ta clicado chefe, e o boolean tá: " + abrirSidePanel);
         } else if (e.getX() > 255 && e.getY() > 20 && e.getY() < 550 && abrirSidePanel) {
             this.abrirSidePanel = !this.abrirSidePanel;
-        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 70 && e.getY() < 90 && abrirSidePanel) {
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 80 && e.getY() < 125 && abrirSidePanel) {
             new AndroidRota(android);
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 130 && e.getY() < 175 && abrirSidePanel) {
+            //System.out.println("vis rota");
+            new AndroidVisRota(android);
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 180 && e.getY() < 225 && abrirSidePanel) {
+            System.out.println("sobre");
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         clickInicial = e.getPoint();
-
     }
 
     @Override
@@ -234,6 +224,7 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
 
     @Override
     public void mouseEntered(MouseEvent e) {
+
     }
 
     @Override
@@ -256,12 +247,37 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
 
         setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
         android.repaint();
-
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-//        System.out.println("xy: " + e.getX() + ", " + e.getY());
+        if (e.getX() > 0 && e.getX() < 255 && e.getY() > 80 && e.getY() < 125 && abrirSidePanel) {//botao1
+            rectY = 80;
+            desenharRect = true;
+            painelMapa.repaint();
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 130 && e.getY() < 175 && abrirSidePanel) {//botao2
+            rectY = 130;
+            desenharRect = true;
+            painelMapa.repaint();
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 180 && e.getY() < 225 && abrirSidePanel) {//botao3
+            rectY = 180;
+            desenharRect = true;
+            painelMapa.repaint();
+        } else {
+            rectY = 0;
+            desenharRect = false;
+            painelMapa.repaint();
+        }
+    }
+
+    private boolean desenharRect = false;
+    private int rectY = 0;
+
+    private void desenharRect(Graphics2D g2d) {
+        if (abrirSidePanel && desenharRect) {
+            g2d.setColor(new Color(52, 52, 52, 25));
+            g2d.fillRect(xSP + 10, rectY, 235, 45);
+        }
     }
 
 }

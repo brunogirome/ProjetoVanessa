@@ -3,12 +3,15 @@ package ProjetoVanessa;
 import java.awt.Color;
 import java.awt.Font;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 public interface Constantes {
 
     //Constantes de formatação
     public final static DecimalFormat FORMATO_MIN = new DecimalFormat("00");
-    public final static DecimalFormat FORMATO_HORA = new DecimalFormat(" 0");
+    public final static DecimalFormat FORMATO_HORA = new DecimalFormat("0");
 
     //Cores básicas da aplicação
     public final static Color AZUL1 = new Color(23, 163, 224);
@@ -19,5 +22,8 @@ public interface Constantes {
     public final static Color CINZATOPO = new Color(55, 55, 55);
 
     public static final String Century = "Century Gothic";
+
+    public static final SimpleDateFormat fmtHora = new SimpleDateFormat("HH:mm");
+    public static final DateTimeFormatter horaSQL = DateTimeFormatter.ofPattern("HH:mm");
 
 }

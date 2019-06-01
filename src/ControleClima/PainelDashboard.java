@@ -1,8 +1,6 @@
 package ControleClima;
 
-import java.awt.event.MouseEvent;
 import ProjetoVanessa.Constantes;
-import java.awt.Color;
 import javax.swing.JPanel;
 
 public class PainelDashboard extends PainelClima {

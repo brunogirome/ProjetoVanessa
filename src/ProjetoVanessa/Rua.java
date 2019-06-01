@@ -76,6 +76,14 @@ public class Rua extends Conexoes {
         }
     }
 
+    public static String[] ruasStrings() {
+        String[] stringReturn = new String[Control.LISTAS_RUAS.size()];
+        for (int i = 0; i < Control.LISTAS_RUAS.size(); i++) {
+            stringReturn[i] = Control.LISTAS_RUAS.get(i).getDesc();
+        }
+        return stringReturn;
+    }
+
     public Rectangle getBounds() {
         return new Rectangle(x, y, larg, altu);
     }

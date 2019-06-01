@@ -35,6 +35,7 @@ public class Android extends JPanel {
     private float porcenChuva;
     private int vento;
 
+
     public Android(Usuario user, JFrame frame, int temp, float porcenChuva, int vento) {
         this.user = user;
         this.frame = frame;
@@ -60,7 +61,7 @@ public class Android extends JPanel {
         this.add(Ambiente);
 
         new Janela(frame, this, "Celular", LARGURA, ALTURA, JFrame.DISPOSE_ON_CLOSE, true);
-        frame.createBufferStrategy(2);
+        //frame.createBufferStrategy(2);
     }
 
     public static void desenharObjeto(int x, int y, int cX, int cY, int tamImagem, Graphics2D g2d, String localImagem) {

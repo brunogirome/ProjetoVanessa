@@ -39,8 +39,7 @@ public class ControleClimaMouse implements MouseListener, MouseMotionListener {
     @Override
     public void mouseExited(MouseEvent e) {
         if (e.getSource() == ControleClima.labelMini) {
-            //ControleClima.labelMini.setIcon(new ImageIcon("res\\mini1.png"));
-
+            ControleClima.labelMini.setIcon(new ImageIcon("res\\mini1.png"));
         }
     }
 
