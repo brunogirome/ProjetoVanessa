@@ -4,6 +4,7 @@ import ProjetoVanessa.Control;
 import ProjetoVanessa.Janela;
 import ProjetoVanessa.Rotas;
 import ProjetoVanessa.Usuario;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -27,14 +28,13 @@ public class Android extends JPanel {
 
     public JFrame frame;
 
-    public List<Rotas> rotasUser = new ArrayList<>();
+    private List<Rotas> rotasUser = new ArrayList<>();
 
     private Usuario user;
 
     private int temp;
     private float porcenChuva;
     private int vento;
-
 
     public Android(Usuario user, JFrame frame, int temp, float porcenChuva, int vento) {
         this.user = user;
@@ -84,6 +84,14 @@ public class Android extends JPanel {
 
     public int getVento() {
         return vento;
+    }
+
+    public List<Rotas> getRotasUser() {
+        return rotasUser;
+    }
+
+    public void setRotasUser(List<Rotas> rotasUser) {
+        this.rotasUser = rotasUser;
     }
 
 }

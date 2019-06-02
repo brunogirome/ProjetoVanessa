@@ -22,6 +22,7 @@ public interface Constantes {
     public final static Color CINZATOPO = new Color(55, 55, 55);
 
     public static final String Century = "Century Gothic";
+    public static final String MSanSerif = "Microsoft Sans Serif";
 
     public static final SimpleDateFormat fmtHora = new SimpleDateFormat("HH:mm");
     public static final DateTimeFormatter horaSQL = DateTimeFormatter.ofPattern("HH:mm");

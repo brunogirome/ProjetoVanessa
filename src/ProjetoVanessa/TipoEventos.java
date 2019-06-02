@@ -5,8 +5,8 @@ public enum TipoEventos {
     chuva,
     tempestade,
     alagamento,
-    qArvore,
     qLuz,
+    qArvore,
     qPoste,
     acidente
 

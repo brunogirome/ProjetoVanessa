@@ -13,5 +13,8 @@
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/Android/Android.java</file>
         </group>
         <group/>
+        <group name="ProjVanessa">
+            <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/ControleClima/CCAndroid.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -56,9 +56,9 @@ public class AndroidLogin extends AndroidTela implements MouseListener {
     public AndroidLogin(Android android) {
         super(android);
 
-        criarCampo(campoLogin, "Usuário", new Rectangle(88, 295, 169, 30), fonteCampos, this, this);
+        criarCampo(campoLogin, "Usuário", new Rectangle(88, 285, 169, 30), fonteCampos, this, this);
 
-        criarCampo(campoPw, "Senha", new Rectangle(88, 335, 169, 30), new Font("", 0, 16), this, this);
+        criarCampo(campoPw, "Senha", new Rectangle(88, 325, 169, 30), new Font("", 0, 16), this, this);
 
         entrar = new JButton();
         entrar.setIcon(new ImageIcon("res\\entrarW.png"));

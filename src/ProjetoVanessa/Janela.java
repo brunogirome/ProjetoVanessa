@@ -1,5 +1,6 @@
 package ProjetoVanessa;
 
+import Android.Android;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,19 +9,24 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.MouseInputListener;
 
 public class Janela {
 
     int xx, xy;
 
-    public Janela(Container painel, String titulo, int altura, int largura, int closeOP) {
+    public Janela(Container painel, String titulo, int largura, int altura, int closeOP) {
         JFrame frame = new JFrame(titulo);
 
-        Dimension tamanho = new Dimension(altura, largura);
+        Dimension tamanho = new Dimension(largura, altura);
         painel.setMinimumSize(tamanho);
         painel.setMaximumSize(tamanho);
         painel.setPreferredSize(tamanho);
@@ -36,7 +42,27 @@ public class Janela {
 
     }
 
-    public Janela(JFrame frame, Container painel, String titulo, int altura, int largura, int closeOP, boolean undecorated) {
+    public Janela(Container painel, String titulo, int largura, int altura, int closeOP, LayoutManager layout) {
+        JFrame frame = new JFrame(titulo);
+
+        Dimension tamanho = new Dimension(largura, altura);
+        painel.setMinimumSize(tamanho);
+        painel.setMaximumSize(tamanho);
+        painel.setPreferredSize(tamanho);
+
+        painel.setLayout(layout);
+
+        frame.setDefaultCloseOperation(closeOP);
+        frame.setResizable(false);
+        frame.add(painel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+    }
+
+    public Janela(JFrame frame, Container painel, String titulo, int altura, int largura, int closeOP, boolean undecorated/*, Android android*/) {
+
         frame.setTitle(titulo);
         frame.setUndecorated(undecorated);
         frame.setBackground(new Color(0, 0, 0, 0));
@@ -45,6 +71,54 @@ public class Janela {
         painel.setMinimumSize(tamanho);
         painel.setMaximumSize(tamanho);
         painel.setPreferredSize(tamanho);
+        JPanel painelAndroid = new JPanel(new BorderLayout()) {
+            @Override
+            public void paintComponent(Graphics g) {
+                g.drawImage(Control.buscarImagem("res\\framefone.png"), 0, 0, 328, 728, null);
+            }
+        };
+        painelAndroid.setOpaque(false);
+        painelAndroid.setBackground(Color.red);
+        painelAndroid.setBorder(new EmptyBorder(79, 13, 49, 15));
+        painelAndroid.setLayout(new GridLayout(1, 1));
+        painelAndroid.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("loko");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                xx = e.getX();
+                xy = e.getY();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+        });
+        painelAndroid.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getXOnScreen();
+                int y = e.getYOnScreen();
+                frame.setLocation(x - xx, y - xy);
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+            }
+        });
+
 ////
 ////        JPanel shadowPanel = new JPanel(new BorderLayout()) {
 ////            @Override
@@ -62,14 +136,15 @@ public class Janela {
 ////        shadowPanel.setBackground(Color.BLACK);
 ////        shadowPanel.setBorder(new EmptyBorder(0, 0, 20, 20));
 ////        painel.setLayout(new GridLayout(1, 1));
-        
         painel.setLayout(null);
 
         frame.setDefaultCloseOperation(closeOP);
         frame.setResizable(false);
-        frame.setContentPane(painel);
+        // frame.setContentPane(painel);
 ////        frame.setContentPane(shadowPanel);
 ////        shadowPanel.add(painel);
+        frame.setContentPane(painelAndroid);
+        painelAndroid.add(painel);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.repaint();

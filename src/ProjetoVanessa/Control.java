@@ -1,6 +1,5 @@
 package ProjetoVanessa;
 
-import ControleClima.ControleClima;
 import Android.Android;
 import static ProjetoVanessa.Control.hora;
 import static ProjetoVanessa.Control.minutos;
@@ -34,12 +33,13 @@ public class Control implements Constantes {
     public static List<Android> ListaAndroid = new ArrayList<>();
 
     public Control() {
-        //new ControleClima();
         Rua.carregarRuas();
 
         ListaAndroid.add(new Android(new Usuario(0, "João", LISTAS_RUAS.get(24), 0.7), new JFrame(), 23, 0.5f, 10));
 
         ListaEventos.add(new Eventos(LISTAS_RUAS.get(23), TipoEventos.qArvore, 0.9));
+
+        new ControleClima.ControleClima();
 
         timer.start();
     }
@@ -68,7 +68,7 @@ public class Control implements Constantes {
 
     private void checarRotas() {
         for (Android android : ListaAndroid) {
-            for (Rotas rota : android.rotasUser) {
+            for (Rotas rota : android.getRotasUser()) {
                 if (rota.getIni().getTime() <= Horario.getTime() && rota.getFim().getTime() >= Horario.getTime()) {
                     System.out.println(rota.getDesc() + " está sendo analizada.");
                     for (Rua rua : rota.getRuas()) {

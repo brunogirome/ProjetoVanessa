@@ -33,14 +33,16 @@ public abstract class AndroidTela extends JInternalFrame implements Constantes {
         @Override
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
-            renderHints(g2d);
-            g2d.drawImage(Control.buscarImagem("res\\top.png"), 0, 0, 300, 10, null);
+//            renderHints(g2d);
+//            g2d.drawImage(Control.buscarImagem("res\\top.png"), 0, 0, 300, 10, null);
+            g2d.setColor(new Color(0, 0, 0, 0));
+            g2d.fillRect(0, 0, 300, 10);
         }
     };
 
     private int xx, xy;
 
-    protected Rectangle tamanhoTela = new Rectangle(0, 10, 300, 590);
+    protected Rectangle tamanhoTela = new Rectangle(0, 0, 300, 600);
 
     protected Font fonteCampos = new Font("Century Gothic", 0, 16);
 
@@ -108,7 +110,7 @@ public abstract class AndroidTela extends JInternalFrame implements Constantes {
 
         painelTopo.setBounds(0, 0, 300, 10);
 
-        this.add(painelTopo);
+//        this.add(painelTopo);
         this.setVisible(true);
 
     }
@@ -127,7 +129,8 @@ public abstract class AndroidTela extends JInternalFrame implements Constantes {
     protected void desenharFundo(Graphics2D g2d) {
         g2d.setColor(Color.black);
         g2d.fillRect(0, 550, 300, 40);
-        g2d.drawImage(Control.buscarImagem("res\\bottom.png"), 0, 555, 300, 30, null);
+        g2d.drawImage(Control.buscarImagem("res\\bottom.png"), 0, 560, 300, 30, null);
+        g2d.fillRect(0, 590, 300, 10);
 
         g2d.setColor(Color.black);
         g2d.fillRect(0, 0, 300, 20);

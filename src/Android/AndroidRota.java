@@ -54,26 +54,6 @@ public class AndroidRota extends AndroidTela implements ProjetoVanessa.Constante
         elementosTela();
     }
 
-    private void paineisRota(Graphics2D g2d) {
-        for (Rotas rota : android.rotasUser) {
-
-        }
-    }
-
-    private void painelRota(Graphics2D g2d, Rotas rota, int i) {
-        Color bgcolor = Color.GREEN;
-        if (rota.isAlertar()) {
-            if (rota.isAlagamento()) {
-                bgcolor = Color.pink;
-            } else if (rota.isTempestade()) {
-                bgcolor = Color.gray;
-            } else if (rota.isChuva()) {
-                bgcolor = Color.BLUE;
-            }
-        }
-        g2d.fillRect(10, 30 + (i * 124), 280, 124);
-    }
-
     private void elementosTela() {
         labelRota(labelNome, 20, 80, 260, 20);
         fieldRota(fieldNome, 20, 100, 260, 30);
@@ -196,7 +176,7 @@ public class AndroidRota extends AndroidTela implements ProjetoVanessa.Constante
     }
 
     private void criarRota() {
-        android.rotasUser.add(new Rotas(0, fieldNome.getText(), Time.valueOf(hIni.getSelectedItem().toString() + ":00"), Time.valueOf(hFim.getSelectedItem().toString() + ":00"), ruasRota));
+        android.getRotasUser().add(new Rotas(0, fieldNome.getText(), Time.valueOf(hIni.getSelectedItem().toString() + ":00"), Time.valueOf(hFim.getSelectedItem().toString() + ":00"), ruasRota));
     }
 
     @Override
@@ -213,6 +193,9 @@ public class AndroidRota extends AndroidTela implements ProjetoVanessa.Constante
 //            for (Rotas rota : android.rotasUser) {
 //                System.out.println(rota.toString());
 //            }
+            new AndroidMapa(android);
+        }
+        if (e.getX() < 80 && e.getY() > 550) {
             new AndroidMapa(android);
         }
     }

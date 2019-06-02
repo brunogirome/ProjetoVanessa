@@ -75,15 +75,15 @@ public class AndroidCadastro extends AndroidTela implements MouseListener {
         label.setForeground(Color.white);
         panelCadastro.add(label);
 
-        criarCampo(nome, "Nome", Color.white, Color.darkGray, new Rectangle(60, 150, 205, 30), fonteCampos, this, this);
+        criarCampo(nome, "Nome", Color.white, Color.darkGray, new Rectangle(60, 140, 205, 30), fonteCampos, this, this);
 
-        criarCampo(user, "Usuário", Color.white, Color.darkGray, new Rectangle(60, 200, 205, 30), fonteCampos, this, this);
+        criarCampo(user, "Usuário", Color.white, Color.darkGray, new Rectangle(60, 190, 205, 30), fonteCampos, this, this);
 
-        criarCampo(email, "E-Mail", Color.white, Color.darkGray, new Rectangle(60, 250, 205, 30), fonteCampos, this, this);
+        criarCampo(email, "E-Mail", Color.white, Color.darkGray, new Rectangle(60, 240, 205, 30), fonteCampos, this, this);
 
-        criarCampo(senha1, "Senha", Color.white, Color.darkGray, new Rectangle(60, 300, 205, 30), new Font("", 0, 16), this, this);
+        criarCampo(senha1, "Senha", Color.white, Color.darkGray, new Rectangle(60, 290, 205, 30), new Font("", 0, 16), this, this);
 
-        criarCampo(senha2, "Confirme sua senha", Color.white, Color.DARK_GRAY, new Rectangle(60, 350, 195, 30), new Font("", 0, 16), this, this);
+        criarCampo(senha2, "Confirme sua senha", Color.white, Color.DARK_GRAY, new Rectangle(60, 340, 195, 30), new Font("", 0, 16), this, this);
 
         botaoRegistrar.setBounds(35, 425, 230, 45);
         botaoRegistrar.setIcon(new ImageIcon("res\\registrar.png"));
