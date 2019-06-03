@@ -3,6 +3,7 @@ package Android;
 import ProjetoVanessa.Constantes;
 import ProjetoVanessa.Control;
 import ProjetoVanessa.Rotas;
+import ProjetoVanessa.Rua;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,9 +11,15 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class AndroidVisRota extends AndroidTela implements MouseListener, Constantes {
+
+    private List<JLabel> listaBTN = new ArrayList<>();
 
     private JPanel painelVisRota = new JPanel(null) {
         @Override
@@ -38,10 +45,17 @@ public class AndroidVisRota extends AndroidTela implements MouseListener, Consta
     }
 
     private void paineisRota(Graphics2D g2d) {
-
         for (int i = 0; i < android.getRotasUser().size(); i++) {
             painelRota(g2d, android.getRotasUser().get(i), i);
+            configurarBotao(i);
         }
+    }
+
+    private void configurarBotao(int i) {
+        listaBTN.add(new JLabel(new ImageIcon("res\\tracarRota.png")));
+        listaBTN.get(i).setBounds(10, 87 + (i * 134), 44, 52);
+        listaBTN.get(i).addMouseListener(this);
+        painelVisRota.add(listaBTN.get(i));
     }
 
     private void painelRota(Graphics2D g2d, Rotas rota, int i) {
@@ -54,6 +68,8 @@ public class AndroidVisRota extends AndroidTela implements MouseListener, Consta
             } else if (rota.isChuva()) {
                 bg = Control.buscarImagem("res\\cardChuva.png");
             }
+        } else {
+            bg = Control.buscarImagem("res\\cardLimpo.png");
         }
         g2d.drawImage(bg, 10, 30 + (i * 134), 280, 124, null);
         g2d.setFont(new Font("Microsoft Sans Serif", 0, 24));
@@ -61,6 +77,25 @@ public class AndroidVisRota extends AndroidTela implements MouseListener, Consta
         g2d.setFont(new Font("Microsoft Sans Serif", 0, 18));
         desenharStroke(g2d, fmtHora.format(rota.getIni()), 235, 60 + (i * 134), Color.WHITE, Color.BLACK);
         desenharStroke(g2d, fmtHora.format(rota.getFim()), 235, 80 + (i * 134), Color.WHITE, Color.BLACK);
+        //g2d.drawImage(Control.buscarImagem("res\\tracarRota.png"), 10, 87, 44, 52, null);
+
+    }
+
+    private void botaoTracar(MouseEvent e) {
+        if (listaBTN.size() > 0) {
+            for (int i = 0; i < listaBTN.size(); i++) {
+                if (e.getSource() == listaBTN.get(i)) {
+                    android.getRuasTracar().clear();
+                    for (Rua rua : android.getRotasUser().get(i).getRuas()) {
+                        android.getRuasTracar().add(rua);
+                    }
+                    android.setDesenharRuas(android.isDesenharRuas() == false);
+                    System.out.println("Estado da var do androide que desenha as parada: " + android.isDesenharRuas());
+                    new AndroidMapa(android);
+                }
+            }
+        }
+
     }
 
     @Override
@@ -68,6 +103,7 @@ public class AndroidVisRota extends AndroidTela implements MouseListener, Consta
         if (e.getX() < 80 && e.getY() > 550) {
             new AndroidMapa(android);
         }
+        botaoTracar(e);
     }
 
     @Override

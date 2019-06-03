@@ -8,11 +8,11 @@ import java.util.List;
 
 public class Areas {
 
-    public int x, y;
+    private int x, y;
 
-    public int comp, altu;
+    private int comp, altu;
 
-    private TipoEventos evento;
+    private TipoEventos tipoEvento;
 
     private final int TAM_ICONE = 32;
 
@@ -23,7 +23,7 @@ public class Areas {
         this.y = y;
         this.comp = comp;
         this.altu = altu;
-        this.evento = evento;
+        this.tipoEvento = evento;
 
         checarCor();
     }
@@ -41,18 +41,24 @@ public class Areas {
                     cY,
                     TAM_ICONE,
                     g2d,
-                    "res\\" + evento + ".png");
+                    "res\\" + tipoEvento + ".png");
         }
 
     }
 
     private void checarCor() {
-        switch (this.evento) {
+        switch (this.tipoEvento) {
             case chuva:
-                c1 = new Color(45, 45, 90, 52);
-                c2 = new Color(45, 45, 180, 128);
+                c1 = new Color(64, 89, 130, 128);
+                c2 = new Color(100, 122, 146, 128);
                 break;
             case alagamento:
+                c1 = new Color(58, 114, 137, 128);
+                c2 = new Color(53, 82, 95, 128);
+                break;
+            case tempestade:
+                c1 = new Color(101, 84, 88, 128);
+                c2 = new Color(77, 63, 63, 128);
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de evento inválido");
@@ -106,4 +112,13 @@ public class Areas {
             return ((y + altu) / 2) + (y - cY);
         }
     }
+
+    public TipoEventos getTipo() {
+        return tipoEvento;
+    }
+
+    public void setTipo(TipoEventos evento) {
+        this.tipoEvento = evento;
+    }
+
 }

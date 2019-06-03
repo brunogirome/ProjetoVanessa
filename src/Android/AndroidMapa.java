@@ -4,6 +4,7 @@ import ProjetoVanessa.Areas;
 import ProjetoVanessa.Constantes;
 import ProjetoVanessa.Control;
 import ProjetoVanessa.Eventos;
+import ProjetoVanessa.Rua;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -115,7 +116,7 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
         // Primeira layer, câmera sobre as coordenadas do mapa.
         camera(g2d);
         // Layer de desenho de ruas
-        //desenharRuas(g2d);
+        desenharRuas(g2d);
         // Segunda layer, áreas como chuvas, alagamentos, e etc.
         desenharAreas(g2d);
         // Terceira layer, eventos, como queda de árvore, acidentes e etc.
@@ -129,6 +130,15 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
     private void camera(Graphics2D g2d) {
         limitarCamera();
         g2d.drawImage(Control.buscarImagem("res\\cidade.png").getSubimage(cX, cY, 300, 476), 0, 21, 300, 476, null);
+    }
+
+    private void desenharRuas(Graphics2D g2d) {
+        if (android.isDesenharRuas()) {
+            for (Rua rua : android.getRuasTracar()) {
+                rua.desenharRua(g2d, cX, cY);
+            }
+        }
+
     }
 
     // Metódo utilizado para centralizar a câmera em um certo ponto

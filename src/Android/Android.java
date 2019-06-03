@@ -3,6 +3,7 @@ package Android;
 import ProjetoVanessa.Control;
 import ProjetoVanessa.Janela;
 import ProjetoVanessa.Rotas;
+import ProjetoVanessa.Rua;
 import ProjetoVanessa.Usuario;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,6 +36,10 @@ public class Android extends JPanel {
     private int temp;
     private float porcenChuva;
     private int vento;
+
+    private List<Rua> ruasTracar = new ArrayList<>();
+
+    private boolean desenharRuas = false;
 
     public Android(Usuario user, JFrame frame, int temp, float porcenChuva, int vento) {
         this.user = user;
@@ -92,6 +97,22 @@ public class Android extends JPanel {
 
     public void setRotasUser(List<Rotas> rotasUser) {
         this.rotasUser = rotasUser;
+    }
+
+    public List<Rua> getRuasTracar() {
+        return ruasTracar;
+    }
+
+    public void setRuasTracar(List<Rua> ruasTracar) {
+        this.ruasTracar = ruasTracar;
+    }
+
+    public boolean isDesenharRuas() {
+        return desenharRuas;
+    }
+
+    public void setDesenharRuas(boolean desenharRuas) {
+        this.desenharRuas = desenharRuas;
     }
 
 }

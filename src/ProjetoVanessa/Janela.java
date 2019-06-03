@@ -61,6 +61,24 @@ public class Janela {
 
     }
 
+    public Janela(Container painel, int largura, int altura, int closeOP, LayoutManager layout, JFrame frame) {
+        
+        Dimension tamanho = new Dimension(largura, altura);
+        painel.setMinimumSize(tamanho);
+        painel.setMaximumSize(tamanho);
+        painel.setPreferredSize(tamanho);
+
+        painel.setLayout(layout);
+
+        frame.setDefaultCloseOperation(closeOP);
+        frame.setResizable(false);
+        frame.add(painel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+    }
+
     public Janela(JFrame frame, Container painel, String titulo, int altura, int largura, int closeOP, boolean undecorated/*, Android android*/) {
 
         frame.setTitle(titulo);

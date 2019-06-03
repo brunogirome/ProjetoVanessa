@@ -35,10 +35,10 @@ public class Control implements Constantes {
     public Control() {
         Rua.carregarRuas();
 
-        ListaAndroid.add(new Android(new Usuario(0, "João", LISTAS_RUAS.get(24), 0.7), new JFrame(), 23, 0.5f, 10));
+        //ListaAndroid.add(new Android(new Usuario(LISTAS_RUAS.get(24), 0.7), new JFrame(), 23, 0.5f, 10));
 
-        ListaEventos.add(new Eventos(LISTAS_RUAS.get(23), TipoEventos.qArvore, 0.9));
-
+        //ListaEventos.add(new Eventos(LISTAS_RUAS.get(23), TipoEventos.qArvore, 0.9));
+        //ListaAreas.add(new Areas(0, 0, 500, 300, TipoEventos.chuva));
         new ControleClima.ControleClima();
 
         timer.start();
@@ -75,17 +75,6 @@ public class Control implements Constantes {
                         for (Eventos eventos : ListaEventos) {
                             if (rua.getBounds().intersects(eventos.getBounds())) {
                                 rota.setAlertar(true);
-                                if (eventos.getTipo() == TipoEventos.alagamento) {
-                                    rota.setAlagamento(true);
-                                } else if (eventos.getTipo() == TipoEventos.tempestade) {
-                                    rota.setTempestade(true);
-                                } else if (eventos.getTipo() == TipoEventos.chuva) {
-                                    rota.setChuva(true);
-                                } else {
-                                    rota.setAlagamento(false);
-                                    rota.setTempestade(false);
-                                    rota.setChuva(false);
-                                }
                                 if (eventos.getTipo() == TipoEventos.qArvore) {
                                     rota.setqArvore(true);
                                 } else {
@@ -110,8 +99,28 @@ public class Control implements Constantes {
                                 rota.setAlertar(false);
                             }
                         }
+                        for (Areas area : ListaAreas) {
+                            if (rua.getBounds().intersects(area.getBounds())) {
+                                rota.setAlertar(true);
+                                if (area.getTipo() == TipoEventos.alagamento) {
+                                    rota.setAlagamento(true);
+                                } else if (area.getTipo() == TipoEventos.tempestade) {
+                                    rota.setTempestade(true);
+                                } else if (area.getTipo() == TipoEventos.chuva) {
+                                    rota.setChuva(true);
+                                } else {
+                                    rota.setAlagamento(false);
+                                    rota.setTempestade(false);
+                                    rota.setChuva(false);
+                                }
+                            } else {
+                                rota.setAlertar(false);
+                            }
+                        }
                     }
 
+                } else {
+                    rota.setAlertar(false);
                 }
             }
         }
@@ -122,8 +131,7 @@ public class Control implements Constantes {
         public void actionPerformed(ActionEvent e) {
             atualizarHora();
 
-            System.out.println("------------------------");
-            System.out.println("Hora atual: " + Horario.toString() + ", em LONG: " + Horario.getTime());
+            System.out.println("Hora atual: " + Horario.toString());
             System.out.println("------------------------");
         }
     });

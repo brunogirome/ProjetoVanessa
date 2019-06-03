@@ -2,21 +2,17 @@ package ProjetoVanessa;
 
 public class Usuario {
 
-    private int id;
-    private String nome;
     private Rua rua;
     private int x;
     private int y;
-    private int tempLocal;
-    private int ventoLocal;
-    private double porcenChuva;
+    private double desloc;
 
-    public Usuario(int id, String nome, Rua rua, double desloc) {
-        this.id = id;
-        this.nome = nome;
+    public Usuario(Rua rua, double desloc) {
         this.rua = rua;
+        this.desloc = desloc;
 
         defXY(desloc);
+
     }
 
     private void defXY(double desloc) {
@@ -28,22 +24,6 @@ public class Usuario {
             this.y = rua.getY() + 2;
         } else {
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public int getX() {
@@ -62,30 +42,12 @@ public class Usuario {
         this.y = y;
     }
 
-    public int getTempLocal() {
-        return tempLocal;
+    public Rua getRua() {
+        return rua;
     }
 
-    public void setTempLocal(int tempLocal) {
-        this.tempLocal = tempLocal;
+    public double getDesloc() {
+        return desloc;
     }
-
-    public int getVentoLocal() {
-        return ventoLocal;
-    }
-
-    public void setVentoLocal(int ventoLocal) {
-        this.ventoLocal = ventoLocal;
-    }
-
-    public double getPorcenChuva() {
-        return porcenChuva;
-    }
-
-    public void setPorcenChuva(double porcenChuva) {
-        this.porcenChuva = porcenChuva;
-    }
-    
-    
 
 }
