@@ -24,6 +24,7 @@ public class CCAndroid extends JPanel implements ActionListener {
     private JTable table;
     private JScrollPane scrollTabela;
     private JButton novoCelular = new JButton("Novo Celular...");
+    private JButton botaoAtualizar = new JButton(new ImageIcon("res\\reload.png"));
 
     public CCAndroid(JPanel mainPanel) {
         this.setBounds(0, 0, 180, 360);
@@ -40,9 +41,13 @@ public class CCAndroid extends JPanel implements ActionListener {
         labelIcon.setBounds(5, 5, 20, 20);
         this.add(labelIcon);
 
-        novoCelular.setBounds(5, 30, 170, 30);
+        novoCelular.setBounds(5, 30, 135, 30);
         novoCelular.addActionListener(this);
         this.add(novoCelular);
+
+        botaoAtualizar.setBounds(145, 30, 30, 30);
+        botaoAtualizar.addActionListener(this);
+        this.add(botaoAtualizar);
 
         //------------------Tabela------------------------------
         ModeloTabela = new DefaultTableModel();
@@ -66,6 +71,8 @@ public class CCAndroid extends JPanel implements ActionListener {
         this.add(scrollTabela);
         //------------------------------------------------------
 
+    
+
         mainPanel.add(this);
     }
 
@@ -82,10 +89,17 @@ public class CCAndroid extends JPanel implements ActionListener {
     }
 
     private void atualizarTabela() {
+        while (table.getRowCount() > 0) {
+            ModeloTabela.removeRow(0);
+        }
+        rowsTabela();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == botaoAtualizar) {
+            atualizarTabela();
+        }
     }
 
 }
