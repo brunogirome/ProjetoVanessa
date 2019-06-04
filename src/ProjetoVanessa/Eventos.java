@@ -20,6 +20,10 @@ public class Eventos {
         defXY();
     }
 
+    public Rua getRua() {
+        return this.rua;
+    }
+
     private void defXY() {
         if (rua.getX() == (rua.getX() + rua.getLarg()) - 5) {
             this.x = rua.getX() + 2;
@@ -32,7 +36,7 @@ public class Eventos {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 1, 1);
+        return new Rectangle(x - 5, y - 5, 10, 10);
     }
 
     public void desenharEvento(Graphics2D g2d, int cX, int cY) {

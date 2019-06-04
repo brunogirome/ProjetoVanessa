@@ -36,7 +36,10 @@ public class Control implements Constantes {
         Rua.carregarRuas();
 
         //ListaAndroid.add(new Android(new Usuario(LISTAS_RUAS.get(24), 0.7), new JFrame(), 23, 0.5f, 10));
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
         //ListaEventos.add(new Eventos(LISTAS_RUAS.get(23), TipoEventos.qArvore, 0.9));
         //ListaAreas.add(new Areas(0, 0, 500, 300, TipoEventos.chuva));
         new ControleClima.ControleClima();
@@ -72,28 +75,43 @@ public class Control implements Constantes {
                 if (rota.getIni().getTime() <= Horario.getTime() && rota.getFim().getTime() >= Horario.getTime()) {
                     System.out.println(rota.getDesc() + " está sendo analizada.");
                     for (Rua rua : rota.getRuas()) {
+<<<<<<< HEAD
+                        for (Eventos evento : ListaEventos) {
+                            //if (rua.getBounds().intersects(evento.getBounds())) {
+                            if (rua.getBounds().intersects(evento.getBounds())) {
+                                if (evento.getTipo() == TipoEventos.qArvore) {
+=======
                         for (Eventos eventos : ListaEventos) {
                             if (rua.getBounds().intersects(eventos.getBounds())) {
                                 rota.setAlertar(true);
                                 if (eventos.getTipo() == TipoEventos.qArvore) {
+>>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
                                     rota.setqArvore(true);
-                                } else {
-                                    rota.setqArvore(false);
                                 }
-                                if (eventos.getTipo() == TipoEventos.qPoste) {
+                                if (evento.getTipo() == TipoEventos.qPoste) {
                                     rota.setqPoste(true);
-                                } else {
-                                    rota.setqPoste(false);
                                 }
-                                if (eventos.getTipo() == TipoEventos.acidente) {
+                                if (evento.getTipo() == TipoEventos.acidente) {
                                     rota.setAcidente(true);
-                                } else {
-                                    rota.setAcidente(false);
                                 }
-                                if (eventos.getTipo() == TipoEventos.qLuz) {
+                                if (evento.getTipo() == TipoEventos.qLuz) {
                                     rota.setqLuz(true);
+                                }
+                            }
+                        }
+                        for (Areas area : ListaAreas) {
+                            if (rua.getBounds().intersects(area.getBounds())) {
+                                rota.setAlertar(true);
+                                if (area.getTipo() == TipoEventos.alagamento) {
+                                    rota.setAlagamento(true);
+                                } else if (area.getTipo() == TipoEventos.tempestade) {
+                                    rota.setTempestade(true);
+                                } else if (area.getTipo() == TipoEventos.chuva) {
+                                    rota.setChuva(true);
                                 } else {
-                                    rota.setqLuz(false);
+                                    rota.setAlagamento(false);
+                                    rota.setTempestade(false);
+                                    rota.setChuva(false);
                                 }
                             } else {
                                 rota.setAlertar(false);

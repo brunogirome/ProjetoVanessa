@@ -5,6 +5,10 @@ import ProjetoVanessa.Constantes;
 import ProjetoVanessa.Control;
 import ProjetoVanessa.Eventos;
 import ProjetoVanessa.Rua;
+<<<<<<< HEAD
+import ProjetoVanessa.TipoEventos;
+=======
+>>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,9 +18,15 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -119,10 +129,11 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
         desenharRuas(g2d);
         // Segunda layer, áreas como chuvas, alagamentos, e etc.
         desenharAreas(g2d);
-        // Terceira layer, eventos, como queda de árvore, acidentes e etc.
-        desenharEventos(g2d);
         // Quarta layer, posicionamento atual do GPS.
         desenharLocalidade(g2d);
+        // Terceira layer, eventos, como queda de árvore, acidentes e etc.
+        desenharEventos(g2d);
+
     }
 
     // Método responsável pela visualização de uma determinada parte do mapa, que é
@@ -181,6 +192,14 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
             g2d.drawString("Suas Rotas", xSP + 45, 160);
             g2d.drawImage(Control.buscarImagem("res\\spInfo.png"), xSP + 10, 191, 24, 24, null);
             g2d.drawString("Sobre", xSP + 45, 210);
+            g2d.drawImage(Control.buscarImagem("res\\qArvore.png"), xSP + 10, 241, 24, 24, null);
+            g2d.drawString("R. Queda de Árvore", xSP + 45, 260);
+            g2d.drawImage(Control.buscarImagem("res\\qPoste.png"), xSP + 10, 291, 24, 24, null);
+            g2d.drawString("R. Queda de Poste", xSP + 45, 310);
+            g2d.drawImage(Control.buscarImagem("res\\acidente.png"), xSP + 10, 341, 24, 24, null);
+            g2d.drawString("R. Acidente", xSP + 45, 360);
+            g2d.drawImage(Control.buscarImagem("res\\qLuz.png"), xSP + 10, 391, 24, 24, null);
+            g2d.drawString("R. Falta de Luz", xSP + 45, 410);
             //g2d.fillRect(xSP, 90, 255, 2);
 
         } else {
@@ -207,19 +226,41 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getX() < 64 && e.getY() > 486 && e.getY() < 550 && !abrirSidePanel) {
+        if (e.getX() < 64 && e.getY() > 486 && e.getY() < 550 && !abrirSidePanel) {//abrir panel
             this.abrirSidePanel = !this.abrirSidePanel;
             timerSP.start();
-        } else if (e.getX() > 255 && e.getY() > 20 && e.getY() < 550 && abrirSidePanel) {
+        } else if (e.getX() > 255 && e.getY() > 20 && e.getY() < 550 && abrirSidePanel) {//fechar panel
             this.abrirSidePanel = !this.abrirSidePanel;
-        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 80 && e.getY() < 125 && abrirSidePanel) {
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 80 && e.getY() < 125 && abrirSidePanel) {//rota
             new AndroidRota(android);
-        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 130 && e.getY() < 175 && abrirSidePanel) {
-            //System.out.println("vis rota");
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 130 && e.getY() < 175 && abrirSidePanel) {//visRosta
             new AndroidVisRota(android);
-        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 180 && e.getY() < 225 && abrirSidePanel) {
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 180 && e.getY() < 225 && abrirSidePanel) {//about
             System.out.println("sobre");
+            abrirAbout();
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 230 && e.getY() < 275 && abrirSidePanel) {//arvore
+            Control.ListaEventos.add(new Eventos(android.getUser().getRua(), TipoEventos.qArvore, android.getUser().getDesloc()));
+            this.abrirSidePanel = !this.abrirSidePanel;
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 280 && e.getY() < 325 && abrirSidePanel) {//poste
+            Control.ListaEventos.add(new Eventos(android.getUser().getRua(), TipoEventos.qPoste, android.getUser().getDesloc()));
+            this.abrirSidePanel = !this.abrirSidePanel;
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 330 && e.getY() < 375 && abrirSidePanel) {//acidente
+            Control.ListaEventos.add(new Eventos(android.getUser().getRua(), TipoEventos.acidente, android.getUser().getDesloc()));
+            this.abrirSidePanel = !this.abrirSidePanel;
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 380 && e.getY() < 425 && abrirSidePanel) {//luz
+            Control.ListaEventos.add(new Eventos(android.getUser().getRua(), TipoEventos.qLuz, android.getUser().getDesloc()));
+            this.abrirSidePanel = !this.abrirSidePanel;
         }
+    }
+
+    private void abrirAbout() {
+        try {
+            File file = new File("paginaabout\\about.html");
+            Desktop.getDesktop().browse(file.toURI());
+        } catch (IOException e) {
+            System.out.println("Erro ao abrir o about:\n" + e);
+        }
+
     }
 
     @Override
@@ -271,6 +312,22 @@ public class AndroidMapa extends AndroidTela implements MouseListener, MouseMoti
             painelMapa.repaint();
         } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 180 && e.getY() < 225 && abrirSidePanel) {//botao3
             rectY = 180;
+            desenharRect = true;
+            painelMapa.repaint();
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 230 && e.getY() < 275 && abrirSidePanel) {//botao arvore
+            rectY = 230;
+            desenharRect = true;
+            painelMapa.repaint();
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 280 && e.getY() < 325 && abrirSidePanel) {//botao poste
+            rectY = 280;
+            desenharRect = true;
+            painelMapa.repaint();
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 330 && e.getY() < 375 && abrirSidePanel) {//botao acidente
+            rectY = 330;
+            desenharRect = true;
+            painelMapa.repaint();
+        } else if (e.getX() > 0 && e.getX() < 255 && e.getY() > 380 && e.getY() < 425 && abrirSidePanel) {//botao fluz
+            rectY = 380;
             desenharRect = true;
             painelMapa.repaint();
         } else {

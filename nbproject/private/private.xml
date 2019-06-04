@@ -12,9 +12,26 @@
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/ControleClima/ControleClima.java</file>
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/Android/Android.java</file>
         </group>
+<<<<<<< HEAD
+        <group name="ProjVanessa">
+            <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/ControleClima/CCAndroid.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/ProjetoVanessa/Control.java</file>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/ProjetoVanessa/Janela.java</file>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/Android/AndroidMapa.java</file>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/ProjetoVanessa/Rotas.java</file>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/ControleClima/ControleClima.java</file>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/Android/AndroidVisRota.java</file>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/ProjetoVanessa/Eventos.java</file>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/ControleClima/CCAndroid.java</file>
+            <file>file:/C:/Users/28264088/Downloads/ProjetoVanessa-master/ProjetoVanessa-master/src/ControleClima/PaineisAdd.java</file>
+        </group>
+=======
         <group/>
         <group name="ProjVanessa">
             <file>file:/G:/Users/LN/Documents/GitHub/ProjetoVanessa/src/ControleClima/CCAndroid.java</file>
         </group>
+>>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
     </open-files>
 </project-private>
