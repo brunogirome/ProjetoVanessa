@@ -43,11 +43,7 @@ public class PaineisAdd extends JPanel implements ActionListener {
 
     public PaineisAdd(JPanel panel, int x, String[] list, TipoEventos[] vetorEvento, int tipo) {
         this.setLayout(null);
-<<<<<<< HEAD
         this.setBounds(x, 0, 222, 195);
-=======
-        this.setBounds(x, 40, 222, 320);
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
         this.setBorder(new EtchedBorder(1));
 
         this.vetorEvetos = vetorEvento;
@@ -79,11 +75,7 @@ public class PaineisAdd extends JPanel implements ActionListener {
     }
 
     private void camposDados(JTextField tField, int x, int y) {
-<<<<<<< HEAD
         tField.setBounds(x, y, 55, 20);
-=======
-        tField.setBounds(x, y, 55, 25);
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
         tField.setFont(new Font("Microsoft Sans Serif", 0, 18));
         tField.setHorizontalAlignment(JTextField.HORIZONTAL);
         this.add(tField);
@@ -105,11 +97,7 @@ public class PaineisAdd extends JPanel implements ActionListener {
     }
 
     private void botaoAdicionar(JButton botao) {
-<<<<<<< HEAD
         botao.setBounds(5, 150, 212, 35);
-=======
-        botao.setBounds(5, 100, 212, 25);
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
         botao.setFont(new Font("Microsoft Sans Serif", 0, 14));
         botao.addActionListener(this);
         this.add(botao);

@@ -5,10 +5,7 @@ import ProjetoVanessa.Constantes;
 import ProjetoVanessa.Control;
 import ProjetoVanessa.Eventos;
 import ProjetoVanessa.Rua;
-<<<<<<< HEAD
 import ProjetoVanessa.TipoEventos;
-=======
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

@@ -80,10 +80,6 @@ public class Janela {
     }
 
     public Janela(JFrame frame, Container painel, String titulo, int altura, int largura, int closeOP, boolean undecorated/*, Android android*/) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
         frame.setTitle(titulo);
         frame.setUndecorated(undecorated);
         frame.setBackground(new Color(0, 0, 0, 0));

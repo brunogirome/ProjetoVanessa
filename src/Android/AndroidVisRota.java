@@ -49,7 +49,6 @@ public class AndroidVisRota extends AndroidTela implements MouseListener, Consta
             painelRota(g2d, android.getRotasUser().get(i), i);
             configurarBotao(i);
         }
-<<<<<<< HEAD
     }
 
     private void configurarBotao(int i) {
@@ -59,17 +58,6 @@ public class AndroidVisRota extends AndroidTela implements MouseListener, Consta
         painelVisRota.add(listaBTN.get(i));
     }
 
-=======
-    }
-
-    private void configurarBotao(int i) {
-        listaBTN.add(new JLabel(new ImageIcon("res\\tracarRota.png")));
-        listaBTN.get(i).setBounds(10, 87 + (i * 134), 44, 52);
-        listaBTN.get(i).addMouseListener(this);
-        painelVisRota.add(listaBTN.get(i));
-    }
-
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
     private void painelRota(Graphics2D g2d, Rotas rota, int i) {
         BufferedImage bg = Control.buscarImagem("res\\cardLimpo.png");
         if (rota.isAlertar()) {
@@ -90,7 +78,6 @@ public class AndroidVisRota extends AndroidTela implements MouseListener, Consta
         desenharStroke(g2d, fmtHora.format(rota.getIni()), 235, 60 + (i * 134), Color.WHITE, Color.BLACK);
         desenharStroke(g2d, fmtHora.format(rota.getFim()), 235, 80 + (i * 134), Color.WHITE, Color.BLACK);
         //g2d.drawImage(Control.buscarImagem("res\\tracarRota.png"), 10, 87, 44, 52, null);
-<<<<<<< HEAD
         desenharEvts(g2d, rota, i);
     }
 
@@ -107,9 +94,6 @@ public class AndroidVisRota extends AndroidTela implements MouseListener, Consta
         if (rota.isqLuz()) {
             g2d.drawImage(Control.buscarImagem("res\\qLuz.png"), 96, 108 + (i * 134), 36, 36, null);
         }
-=======
-
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
     }
 
     private void botaoTracar(MouseEvent e) {

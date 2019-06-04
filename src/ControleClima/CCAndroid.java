@@ -35,11 +35,7 @@ public class CCAndroid extends JPanel implements ActionListener {
     private JButton botaoAtualizar = new JButton(new ImageIcon("res\\reload.png"));
 
     public CCAndroid(JPanel mainPanel) {
-<<<<<<< HEAD
         this.setBounds(0, 0, 180, 195);
-=======
-        this.setBounds(0, 0, 180, 360);
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
         this.setBorder(new EtchedBorder(1));
         this.setLayout(null);
 
@@ -79,11 +75,7 @@ public class CCAndroid extends JPanel implements ActionListener {
 
         scrollTabela = new JScrollPane();
         scrollTabela.setViewportView(table);
-<<<<<<< HEAD
         scrollTabela.setBounds(5, 65, 170, 120);
-=======
-        scrollTabela.setBounds(5, 65, 170, 200);
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
         this.add(scrollTabela);
         //------------------------------------------------------
 
@@ -162,17 +154,10 @@ public class CCAndroid extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 Control.ListaAndroid.add(
                         new Android(
-<<<<<<< HEAD
                                 new Usuario(Control.LISTAS_RUAS.get(bRua.getSelectedIndex()), Float.parseFloat(desloc.getText()) / 100),
                                 new JFrame(),
                                 Integer.parseInt(temp.getText()),
                                 Float.parseFloat(chuva.getText()) / 100,
-=======
-                                new Usuario(Control.LISTAS_RUAS.get(bRua.getSelectedIndex()), Float.parseFloat(desloc.getText())),
-                                new JFrame(),
-                                Integer.parseInt(temp.getText()),
-                                Float.parseFloat(chuva.getText()),
->>>>>>> 0156769e9b1ea9db2788d6bb520a47dd0990c178
                                 Integer.parseInt(vento.getText())
                         )
                 );

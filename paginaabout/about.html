@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url(myVideo);
+  
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  
+  /* Full height */
+  height: 100%; 
+  
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: justify
+}
+
+#myVideo {
+filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+</style>
+</head>
+<body>
+
+<video autoplay muted id="myVideo" onended="myAddListener()">
+  <source src="video1.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+
+<script>
+
+
+var videoSources = ["video1.mp4", "video2.mp4","video3.mp4"];
+
+          var currentIndex = 0;
+    // listener function changes src
+          function myNewSrc() {
+              var myVideo = document.getElementsByTagName('video')[0];
+              myVideo.src = videoSources[currentIndex];
+              myVideo.load();
+          }
+
+         
+    // add a listener function to the ended event
+          function myAddListener(){
+              var myVideo = document.getElementsByTagName('video')[0];
+              currentIndex = (currentIndex+1) % videoSources.length;
+              myVideo.src = videoSources[currentIndex];
+              myVideo.addEventListener('ended', myNewSrc, false);
+              
+          }
+</script>
+
+
+
+<div class="bg-image"></div>
+
+<div class="bg-text">
+  <h2>Alteruni Ltda. 2019</h2>
+  <h1 style="font-size:50px">Resumo</h1>
+  <p>Atualizado em 16 de maio de 2019</p>
+  <p>Eventos climáticos de grande devastação e magnitude estão se tornando mais recorrentes na região sudeste (Guarulhos, São Paulo e Rio de Janeiro, por exemplo), órgãos públicos destas áreas enfrentam a necessidade de implementar novas e mais eficazes políticas públicas ao lidar com esse novo tipo de cenário que se torna mais comum. A proposta do projeto visa uma solução no contexto de usabilidade, tendo em vista a carência de uma aplicação dentro da cidade de Guarulhos que disponha de forma centralizada informações relevantes para o usuário com o foco em questões climáticas as quais influenciam o seu cotidiano, como alagamentos, chuvas de alto índice pluviométrico, queda de energia e acidentes. O protótipo é desenvolvido em JAVA para Desktop, porém com um contexto Mobile (Android). Os desafios encontrados mostram a necessidade de um nível de competência maior, além de ferramentas mais abrangentes, como o desenvolvimento nativo para Mobile, usando Interfaces de Programação de Aplicações (do inglês, Application Programming Interface ou API) e frameworks.</p>
+	 <br>
+	 <h3 style="font-size:50px">Desenvolvimento</h3>
+	<p>A linguagem de programação orientada a objetos JAVA foi utilizada para o protótipo, por ter sido aprendida em semestres anteriores, em sua versão 8, baseando-se no padrão de arquitetura MVC (Model-View-Controller, em português, Modelo-Visão-Controle). A modelagem foi feita dentro da ferramenta MySQL Workbench, pelo conhecimento prévio em estabelecer a integração deste com o sistema. Para o desenvolvimento da aplicação, o Ambiente de Desenvolvimento Integrado (do inglês, Integrated Development Environment ou IDE) empregado foi o NetBeans 8.0.2, no sistema operacional Windows 10 Pro. Na manipulação de imagens, o Adobe Photoshop CC 2019. Sendo que todo o ambiente foi disponibilizado dentro dos laboratórios da instituição.
+O design do aplicativo inspira-se nos conceitos propostos pela Google por meio do Material Design, buscando trazer familiaridade (para o contexto Mobile) com uma identidade que é trazida por maioria das aplicações dispostas na PlayStore (loja de aplicativos oficial do sistema operacional móvel Android).
+</p>
+</div>
+
+</body>
+</html>
